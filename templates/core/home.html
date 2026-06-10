@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero-section" id="inicio">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="container">
+    <div class="row min-vh-100 align-items-center">
+      <div class="col-lg-6 hero-content">
+        <div class="hero-badge mb-3 reveal-up">
+          <span class="badge-dot"></span>
+          <span>Disponibles para nuevos proyectos</span>
+        </div>
+        <h1 class="hero-title reveal-up" style="animation-delay:.1s">
+          {{ config.hero_title }}
+        </h1>
+        <p class="hero-subtitle reveal-up" style="animation-delay:.2s">
+          {{ config.hero_subtitle }}
+        </p>
+        <div class="hero-actions reveal-up" style="animation-delay:.3s">
+          <a href="#contacto" class="btn btn-primary-neon btn-lg me-3">
+            <i class="bi bi-rocket-takeoff me-2"></i>Solicitar presupuesto
+          </a>
+          <a href="{% url 'portfolio:list' %}" class="btn btn-outline-neon btn-lg">
+            <i class="bi bi-grid-3x3-gap me-2"></i>Ver proyectos
+          </a>
+        </div>
+        <div class="hero-tech-stack reveal-up" style="animation-delay:.4s">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Docker</span>
+          <span class="tech-pill">APIs REST</span>
+        </div>
+      </div>
+      <div class="col-lg-6 hero-visual reveal-right" style="animation-delay:.2s">
+        <div class="code-window">
+          <div class="code-window-bar">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="window-title">nexus_app/views.py</span>
+          </div>
+          <div class="code-content">
+            <pre class="code-block"><code><span class="code-keyword">from</span> <span class="code-module">django.shortcuts</span> <span class="code-keyword">import</span> render
+<span class="code-keyword">from</span> <span class="code-module">rest_framework</span> <span class="code-keyword">import</span> viewsets
+
+<span class="code-decorator">@api_view</span><span class="code-paren">([</span><span class="code-string">'GET'</span><span class="code-paren">])</span>
+<span class="code-keyword">def</span> <span class="code-func">build_solution</span><span class="code-paren">(</span>request<span class="code-paren">)</span>:
+    <span class="code-string">"""
+    Transformamos tus ideas
+    en software de alto impacto.
+    """</span>
+    solution <span class="code-op">=</span> <span class="code-paren">{</span>
+        <span class="code-string">'quality'</span>: <span class="code-string">'premium'</span>,
+        <span class="code-string">'scalable'</span>: <span class="code-keyword">True</span>,
+        <span class="code-string">'on_time'</span>: <span class="code-keyword">True</span>,
+        <span class="code-string">'stack'</span>: <span class="code-paren">[</span><span class="code-string">'Python'</span>, <span class="code-string">'Django'</span><span class="code-paren">]</span>
+    <span class="code-paren">}</span>
+    <span class="code-keyword">return</span> Response<span class="code-paren">(</span>solution<span class="code-paren">)</span>  <span class="code-comment"># ✓ 200 OK</span></code></pre>
+          </div>
+          <div class="code-cursor-line">
+            <span class="code-cursor"></span>
+          </div>
+        </div>
+        <!-- Floating cards -->
+        <div class="floating-card card-1">
+          <i class="bi bi-check-circle-fill text-success me-2"></i>Entrega en tiempo
+        </div>
+        <div class="floating-card card-2">
+          <i class="bi bi-shield-fill-check text-accent me-2"></i>Código limpio
+        </div>
+        <div class="floating-card card-3">
+          <i class="bi bi-arrow-up-circle-fill text-info me-2"></i>Escalable
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </div>
+</section>
+
+<!-- ===== ESTADÍSTICAS ===== -->
+{% if stats %}
+<section class="stats-section">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      {% for stat in stats %}
+      <div class="col-6 col-md-3">
+        <div class="stat-card reveal-up">
+          <div class="stat-icon"><i class="bi {{ stat.icon }}"></i></div>
+          <div class="stat-number" data-target="{{ stat.value }}">0</div>
+          <div class="stat-suffix">{{ stat.suffix }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== SERVICIOS ===== -->
+<section class="section-pad" id="servicios">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Lo que hacemos</span>
+      <h2 class="section-title reveal-up">Nuestros Servicios</h2>
+      <p class="section-subtitle reveal-up">Soluciones tecnológicas diseñadas para impulsar tu negocio</p>
+    </div>
+    <div class="row g-4">
+      {% for service in services %}
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card reveal-up {% if service.highlight %}service-featured{% endif %}" style="animation-delay:{{ forloop.counter0|floatformat:1 }}00ms">
+          {% if service.highlight %}<div class="featured-badge">Más solicitado</div>{% endif %}
+          <div class="service-icon-wrap">
+            <i class="bi {{ service.icon }}"></i>
+          </div>
+          <h3 class="service-title">{{ service.title }}</h3>
+          <p class="service-desc">{{ service.description }}</p>
+          <a href="#contacto" class="service-cta">
+            Consultar <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECNOLOGÍAS ===== -->
+<section class="tech-section section-pad" id="tecnologias">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Stack técnico</span>
+      <h2 class="section-title reveal-up">Tecnologías que dominamos</h2>
+      <p class="section-subtitle reveal-up">Herramientas modernas para soluciones robustas y escalables</p>
+    </div>
+    <div class="tech-grid">
+      {% for tech in technologies %}
+      <div class="tech-item reveal-up" style="animation-delay:{{ forloop.counter0 }}0ms">
+        <div class="tech-icon-wrap" style="--tech-color:{{ tech.color }}">
+          {% if tech.icon_svg %}
+            {{ tech.icon_svg|safe }}
+          {% elif tech.icon_class %}
+            <i class="{{ tech.icon_class }}"></i>
+          {% else %}
+            <span class="tech-letter">{{ tech.name|slice:":2" }}</span>
+          {% endif %}
+        </div>
+        <span class="tech-name">{{ tech.name }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROYECTOS DESTACADOS ===== -->
+{% if featured_projects %}
+<section class="section-pad" id="proyectos">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Portafolio</span>
+      <h2 class="section-title reveal-up">Proyectos Destacados</h2>
+      <p class="section-subtitle reveal-up">Soluciones reales para clientes reales</p>
+    </div>
+    <div class="row g-4">
+      {% for project in featured_projects %}
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+          <div class="project-image-wrap">
+            {% if project.image %}
+              <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image" loading="lazy">
+            {% else %}
+              <div class="project-image-placeholder"><i class="bi bi-code-square"></i></div>
+            {% endif %}
+            <div class="project-overlay">
+              <div class="project-links">
+                {% if project.public_url %}<a href="{{ project.public_url }}" target="_blank" class="project-link"><i class="bi bi-box-arrow-up-right"></i></a>{% endif %}
+                {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="project-link"><i class="bi bi-github"></i></a>{% endif %}
+                <a href="{% url 'portfolio:detail' project.slug %}" class="project-link"><i class="bi bi-eye"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-status status-{{ project.status }}">{{ project.get_status_display }}</div>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.short_description|default:project.description|truncatechars:100 }}</p>
+            <div class="project-techs">
+              {% for tech in project.get_technologies_list %}
+              <span class="tech-badge">{{ tech }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5 reveal-up">
+      <a href="{% url 'portfolio:list' %}" class="btn btn-outline-neon btn-lg">
+        <i class="bi bi-grid-3x3-gap me-2"></i>Ver todos los proyectos
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== SOBRE NOSOTROS ===== -->
+<section class="about-section section-pad" id="nosotros">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <div class="about-visual reveal-left">
+          <div class="about-card-main">
+            <div class="about-icon-grid">
+              <div class="about-icon-item"><i class="bi bi-code-slash"></i></div>
+              <div class="about-icon-item"><i class="bi bi-database"></i></div>
+              <div class="about-icon-item"><i class="bi bi-cloud-upload"></i></div>
+              <div class="about-icon-item"><i class="bi bi-shield-check"></i></div>
+            </div>
+            <div class="about-tagline">"Código que transforma negocios"</div>
+          </div>
+          <div class="about-years-badge">
+            <span class="years-number">5+</span>
+            <span class="years-label">años de experiencia</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <span class="section-tag reveal-up">Sobre Nosotros</span>
+        <h2 class="section-title reveal-up">Somos tu equipo de desarrollo de confianza</h2>
+        {% if config.about_history %}
+        <p class="text-muted reveal-up">{{ config.about_history }}</p>
+        {% else %}
+        <p class="text-muted reveal-up">Somos un estudio de desarrollo de software especializado en crear soluciones digitales de alto impacto. Combinamos experiencia técnica con visión de negocio para entregar productos que realmente hacen la diferencia.</p>
+        {% endif %}
+        <div class="row g-3 mt-2">
+          <div class="col-sm-6">
+            <div class="about-value-card reveal-up">
+              <i class="bi bi-bullseye"></i>
+              <div>
+                <strong>Misión</strong>
+                <p class="small text-muted mb-0">{{ config.about_mission|default:"Crear software que impulse el crecimiento de nuestros clientes." }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="about-value-card reveal-up" style="animation-delay:.1s">
+              <i class="bi bi-telescope"></i>
+              <div>
+                <strong>Visión</strong>
+                <p class="small text-muted mb-0">{{ config.about_vision|default:"Ser referentes en desarrollo de software a medida en Latinoamérica." }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="about-value-card reveal-up" style="animation-delay:.2s">
+              <i class="bi bi-stars"></i>
+              <div>
+                <strong>Valores</strong>
+                <p class="small text-muted mb-0">{{ config.about_values|default:"Calidad, transparencia, innovación y compromiso con cada proyecto." }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIOS ===== -->
+{% if testimonials %}
+<section class="section-pad testimonials-section">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Testimonios</span>
+      <h2 class="section-title reveal-up">Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="row g-4">
+      {% for testimonial in testimonials %}
+      <div class="col-md-6 col-lg-4">
+        <div class="testimonial-card reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+          <div class="testimonial-rating mb-3">
+            {% for i in "12345" %}
+              <i class="bi bi-star{% if forloop.counter <= testimonial.rating %}-fill text-warning{% endif %}"></i>
+            {% endfor %}
+          </div>
+          <p class="testimonial-text">"{{ testimonial.message }}"</p>
+          <div class="testimonial-author">
+            {% if testimonial.client_photo %}
+              <img src="{{ testimonial.client_photo.url }}" alt="{{ testimonial.client_name }}" class="testimonial-avatar">
+            {% else %}
+              <div class="testimonial-avatar-placeholder">{{ testimonial.client_name|slice:":1" }}</div>
+            {% endif %}
+            <div>
+              <strong class="d-block">{{ testimonial.client_name }}</strong>
+              <small class="text-muted">{{ testimonial.client_position }}{% if testimonial.client_company %} · {{ testimonial.client_company }}{% endif %}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== CONTACTO ===== -->
+<section class="contact-section section-pad" id="contacto">
+  <div class="contact-bg-shape"></div>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <span class="section-tag reveal-up">Contacto</span>
+        <h2 class="section-title reveal-up">¿Tenés un proyecto en mente?</h2>
+        <p class="text-muted mb-4 reveal-up">Contanos sobre tu idea y te ayudamos a convertirla en realidad. Respondemos en menos de 24 horas.</p>
+        <div class="contact-info-list reveal-up">
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div>
+              <strong>Email</strong>
+              <p class="text-muted mb-0">{{ config.email }}</p>
+            </div>
+          </div>
+          {% if config.phone %}
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-whatsapp"></i></div>
+            <div>
+              <strong>WhatsApp / Teléfono</strong>
+              <p class="text-muted mb-0">{{ config.phone }}</p>
+            </div>
+          </div>
+          {% endif %}
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
+            <div>
+              <strong>Respuesta</strong>
+              <p class="text-muted mb-0">Menos de 24 horas hábiles</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="contact-form-card reveal-right">
+          <form method="post" action="#contacto" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label">{{ form.name.label }}</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">{{ form.phone.label }}</label>
+                {{ form.phone }}
+              </div>
+              <div class="col-12">
+                <label class="form-label">{{ form.message.label }}</label>
+                {{ form.message }}
+                {% if form.message.errors %}<div class="invalid-feedback d-block">{{ form.message.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary-neon w-100 btn-lg">
+                  <i class="bi bi-send me-2"></i>Enviar mensaje
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Proyectos — Nexus Studio Code{% endblock %}
+{% block content %}
+<section style="padding-top:100px;" class="section-pad">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag">Portafolio</span>
+      <h1 class="section-title">Todos nuestros proyectos</h1>
+      <p class="section-subtitle">Soluciones reales que hemos construido para nuestros clientes</p>
+    </div>
+    <div class="row g-4">
+      {% for project in projects %}
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card reveal-up">
+          <div class="project-image-wrap">
+            {% if project.image %}
+              <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image" loading="lazy">
+            {% else %}
+              <div class="project-image-placeholder"><i class="bi bi-code-square"></i></div>
+            {% endif %}
+            <div class="project-overlay">
+              <div class="project-links">
+                {% if project.public_url %}<a href="{{ project.public_url }}" target="_blank" class="project-link"><i class="bi bi-box-arrow-up-right"></i></a>{% endif %}
+                {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="project-link"><i class="bi bi-github"></i></a>{% endif %}
+                <a href="{% url 'portfolio:detail' project.slug %}" class="project-link"><i class="bi bi-eye"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-status status-{{ project.status }}">{{ project.get_status_display }}</div>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.short_description|default:project.description|truncatechars:100 }}</p>
+            <div class="project-techs">
+              {% for tech in project.get_technologies_list %}
+              <span class="tech-badge">{{ tech }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <i class="bi bi-folder2-open display-1 text-muted opacity-25"></i>
+        <p class="text-muted mt-3">Próximamente nuevos proyectos</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{% url 'core:home' %}#contacto" class="btn btn-primary-neon btn-lg">
+        <i class="bi bi-rocket-takeoff me-2"></i>Iniciá tu proyecto
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
