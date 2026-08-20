@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Contacto — Nexus Studio Code" }}{% endblock %}
+
+{% block content %}
+<section class="page-header-section">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag reveal-up">Hablemos de tu idea</span>
+      <h1 class="section-title reveal-up">Contacto & Asesoría Técnica</h1>
+      <p class="section-subtitle reveal-up">¿Tienes un proyecto en mente o necesitas escalar tu equipo de desarrollo? Escríbenos y un arquitecto de software te responderá en menos de 24 horas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad pt-0">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Columna izquierda: Información y canales directos -->
+      <div class="col-lg-5">
+        <div class="contact-info-panel reveal-left">
+          <h3 class="panel-title mb-4">Canales Directos</h3>
+          
+          <div class="contact-channel-card mb-3">
+            <div class="channel-icon text-accent">
+              <i class="bi bi-envelope-at-fill"></i>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">Email Corporativo</span>
+              <a href="mailto:{{ config.email }}" class="channel-link">{{ config.email }}</a>
+            </div>
+          </div>
+
+          {% if config.phone or config.clean_whatsapp_number %}
+          <div class="contact-channel-card mb-3">
+            <div class="channel-icon text-success">
+              <i class="bi bi-whatsapp"></i>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">WhatsApp Directo</span>
+              <a href="{{ config.get_whatsapp_url }}" target="_blank" rel="noopener" class="channel-link">{{ config.phone|default:config.clean_whatsapp_number }}</a>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="contact-channel-card mb-4">
+            <div class="channel-icon text-info">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">Ubicación</span>
+              <span class="channel-link text-muted">{{ config.address|default:"Buenos Aires, Argentina (Atención Global)" }}</span>
+            </div>
+          </div>
+
+          <!-- Card de Garantías -->
+          <div class="guarantee-box p-4 rounded-3 mb-4">
+            <h5 class="text-white mb-3"><i class="bi bi-shield-check text-accent me-2"></i>Compromiso de Confidencialidad</h5>
+            <p class="small text-muted mb-0">Protegemos tu idea antes de empezar. Si lo requieres, podemos firmar un <strong>Acuerdo de Confidencialidad (NDA)</strong> antes de analizar la documentación de tu proyecto.</p>
+          </div>
+
+          <!-- Redes Sociales -->
+          <div class="social-box">
+            <span class="d-block text-muted small mb-2">Síguenos en nuestras redes:</span>
+            <div class="social-links">
+              {% for social in social_links %}
+              <a href="{{ social.url }}" target="_blank" rel="noopener" class="social-link" title="{{ social.platform }}">
+                <i class="bi {{ social.get_icon }}"></i>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Columna derecha: Formulario de Contacto -->
+      <div class="col-lg-7">
+        <div class="contact-form-card reveal-right">
+          <div class="form-header mb-4">
+            <h3 class="text-white mb-2">Envíanos un mensaje</h3>
+            <p class="text-muted small">Completa el siguiente formulario con los detalles básicos de tu consulta.</p>
+          </div>
+
+          <form method="post" action="{% url 'contact:contact' %}" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label text-light small">{{ form.name.label }} <span class="text-accent">*</span></label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label text-light small">{{ form.email.label }} <span class="text-accent">*</span></label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light small">{{ form.phone.label }}</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}<div class="invalid-feedback d-block">{{ form.phone.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <label class="form-label text-light small">{{ form.message.label }} <span class="text-accent">*</span></label>
+                {{ form.message }}
+                {% if form.message.errors %}<div class="invalid-feedback d-block">{{ form.message.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-primary-neon w-100 btn-lg">
+                  <i class="bi bi-send-fill me-2"></i>Enviar Mensaje
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Rápida -->
+    {% if faqs %}
+    <div class="contact-faqs-wrap mt-5 pt-5 border-top border-dark">
+      <div class="text-center mb-4">
+        <h4 class="text-white">Preguntas frecuentes antes de contactar</h4>
+      </div>
+      <div class="row g-4 justify-content-center">
+        {% for faq in faqs %}
+        <div class="col-md-6">
+          <div class="mini-faq-card p-4 rounded-3 h-100">
+            <h6 class="text-accent mb-2"><i class="bi bi-question-circle me-2"></i>{{ faq.question }}</h6>
+            <p class="small text-muted mb-0">{{ faq.answer }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

@@ -1,56 +1,104 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Proyectos — Nexus Studio Code{% endblock %}
+
+{% block title %}Portafolio & Casos de Éxito — {{ config.company_name }}{% endblock %}
+
 {% block content %}
-<section style="padding-top:100px;" class="section-pad">
+<section class="page-header-section">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
   <div class="container">
-    <div class="section-header text-center mb-5">
-      <span class="section-tag">Portafolio</span>
-      <h1 class="section-title">Todos nuestros proyectos</h1>
-      <p class="section-subtitle">Soluciones reales que hemos construido para nuestros clientes</p>
+    <div class="text-center">
+      <span class="section-tag reveal-up">Casos Reales</span>
+      <h1 class="section-title reveal-up">Portafolio & Casos de Éxito</h1>
+      <p class="section-subtitle reveal-up">Plataformas escalables, sistemas ERP y arquitecturas en producción diseñadas para transformar negocios.</p>
     </div>
+
+    <!-- Filtros de Categoría -->
+    <div class="category-filters-wrap d-flex flex-wrap justify-content-center gap-2 mt-4 reveal-up">
+      {% for cat_key, cat_name in categories %}
+      <a href="?categoria={{ cat_key }}" class="category-filter-btn {% if selected_category == cat_key %}active{% endif %}">
+        {{ cat_name }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad pt-0">
+  <div class="container">
     <div class="row g-4">
       {% for project in projects %}
-      <div class="col-md-6 col-lg-4">
-        <div class="project-card reveal-up">
-          <div class="project-image-wrap">
-            {% if project.image %}
-              <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image" loading="lazy">
-            {% else %}
-              <div class="project-image-placeholder"><i class="bi bi-code-square"></i></div>
-            {% endif %}
-            <div class="project-overlay">
-              <div class="project-links">
-                {% if project.public_url %}<a href="{{ project.public_url }}" target="_blank" class="project-link"><i class="bi bi-box-arrow-up-right"></i></a>{% endif %}
-                {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="project-link"><i class="bi bi-github"></i></a>{% endif %}
-                <a href="{% url 'portfolio:detail' project.slug %}" class="project-link"><i class="bi bi-eye"></i></a>
-              </div>
-            </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="case-study-card h-100 reveal-up">
+          
+          <div class="case-study-header d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-accent-subtle text-accent fw-bold px-3 py-1">{{ project.get_category_display }}</span>
+            <span class="project-status status-{{ project.status }}">{{ project.get_status_display }}</span>
           </div>
-          <div class="project-body">
-            <div class="project-status status-{{ project.status }}">{{ project.get_status_display }}</div>
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-desc">{{ project.short_description|default:project.description|truncatechars:100 }}</p>
-            <div class="project-techs">
-              {% for tech in project.get_technologies_list %}
-              <span class="tech-badge">{{ tech }}</span>
+
+          <h2 class="case-study-title text-white fs-4 mb-2">
+            <a href="{% url 'portfolio:detail' project.slug %}" class="text-white text-decoration-none hover-accent">{{ project.title }}</a>
+          </h2>
+          
+          {% if project.client_name %}
+          <div class="client-badge mb-3 small text-muted">
+            <i class="bi bi-building me-1 text-accent"></i>Cliente: <strong>{{ project.client_name }}</strong>
+            <span class="mx-2">·</span>
+            <i class="bi bi-calendar-check me-1"></i>{{ project.completion_date }}
+          </div>
+          {% endif %}
+
+          <p class="case-study-desc text-muted mb-4">{{ project.short_description|default:project.description|truncatechars:150 }}</p>
+
+          <!-- Resultados y Métricas -->
+          {% if project.results %}
+          <div class="case-results-box p-3 rounded-3 mb-4">
+            <strong class="d-block small text-accent mb-1"><i class="bi bi-graph-up-arrow me-1"></i>Impacto Logrado:</strong>
+            <p class="small text-light mb-0" style="white-space: pre-line;">{{ project.results|truncatechars:180 }}</p>
+          </div>
+          {% endif %}
+
+          <div class="case-study-footer mt-auto pt-3 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div class="tech-pills-wrap d-flex flex-wrap gap-1">
+              {% for tech in project.get_technologies_list|slice:":4" %}
+              <span class="tech-badge-sm">{{ tech }}</span>
               {% endfor %}
             </div>
+            
+            <a href="{% url 'portfolio:detail' project.slug %}" class="btn btn-outline-neon btn-sm">
+              Ver Caso Completo <i class="bi bi-arrow-right ms-1"></i>
+            </a>
           </div>
+
         </div>
       </div>
       {% empty %}
       <div class="col-12 text-center py-5">
-        <i class="bi bi-folder2-open display-1 text-muted opacity-25"></i>
-        <p class="text-muted mt-3">Próximamente nuevos proyectos</p>
+        <div class="empty-state-box p-5 rounded-4 border border-dark">
+          <i class="bi bi-folder2-open display-1 text-muted opacity-25 mb-3"></i>
+          <h4 class="text-white">No se encontraron proyectos en esta categoría</h4>
+          <p class="text-muted">Estamos continuamente desplegando nuevas soluciones en producción.</p>
+          <a href="{% url 'portfolio:list' %}" class="btn btn-outline-neon mt-2">Ver todos los proyectos</a>
+        </div>
       </div>
       {% endfor %}
     </div>
-    <div class="text-center mt-5">
-      <a href="{% url 'core:home' %}#contacto" class="btn btn-primary-neon btn-lg">
-        <i class="bi bi-rocket-takeoff me-2"></i>Iniciá tu proyecto
-      </a>
+
+    <!-- CTA Footer -->
+    <div class="cta-banner-card mt-5 p-5 rounded-4 text-center reveal-up">
+      <h3 class="text-white mb-2">¿Tienes una idea o proyecto similar?</h3>
+      <p class="text-muted mb-4">Podemos diseñar una arquitectura personalizada para tu caso de negocio.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'core:home' %}#cotizador" class="btn btn-primary-neon btn-lg">
+          <i class="bi bi-calculator me-2"></i>Calcular Presupuesto Online
+        </a>
+        <a href="{% url 'contact:contact' %}" class="btn btn-outline-neon btn-lg">
+          <i class="bi bi-chat-dots me-2"></i>Hablar con un Especialista
+        </a>
+      </div>
     </div>
+
   </div>
 </section>
 {% endblock %}

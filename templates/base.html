@@ -3,46 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{{ page_title|default:"Nexus Studio Code" }}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Desarrollo de software a medida. Python, Django, APIs, automatización y sistemas de gestión.' }}{% endblock %}">
-  <meta name="keywords" content="{{ site_config.meta_keywords|default:'desarrollo software, django, python, aplicaciones web' }}">
-  <!-- Open Graph -->
-  <meta property="og:title" content="{% block og_title %}{{ site_config.company_name }}{% endblock %}">
+  <title>{% block title %}{{ page_title|default:"Nexus Studio Code — Desarrollo de Software a Medida" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Desarrollo de software a medida, plataformas web, SaaS, APIs y modernización de sistemas.' }}{% endblock %}">
+  <meta name="keywords" content="{{ site_config.meta_keywords|default:'desarrollo software, software factory, python, django, react, saas, apis' }}">
+  
+  <!-- Open Graph / Meta Social -->
+  <meta property="og:title" content="{% block og_title %}{{ site_config.company_name }} — {{ site_config.tagline }}{% endblock %}">
   <meta property="og:description" content="{{ site_config.meta_description }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ request.build_absolute_uri }}">
-  <!-- Fonts -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Google Fonts: Space Grotesk & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Bootstrap 5 -->
+  
+  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  
+  <!-- Schema.org JSON-LD para SEO de Empresa de Software -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ site_config.company_name }}",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web, Cloud, Linux, Windows, macOS",
+    "description": "{{ site_config.meta_description }}",
+    "provider": {
+      "@type": "Organization",
+      "name": "{{ site_config.company_name }}",
+      "url": "{{ request.scheme }}://{{ request.get_host }}",
+      "email": "{{ site_config.email }}",
+      "telephone": "{{ site_config.phone }}"
+    }
+  }
+  </script>
+
   {% block extra_head %}{% endblock %}
 </head>
 <body>
-  <!-- Navbar -->
+
+  <!-- Navbar Corporativa -->
   <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'core:home' %}">
-        <span class="brand-logo">
-          <img src="{% static 'images/logoNSC.png' %}" alt="Nexus Studio Code Logo" class="d-none d-md-inline-block" style="height:50px;">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'core:home' %}">
+        <span class="brand-logo me-2">
+          <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
+        </span>
+        <span class="brand-text d-none d-sm-inline-block fw-bold text-white fs-5">
+          Nexus<span class="text-accent">Studio</span>
         </span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#servicios">Servicios</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#tecnologias">Tecnologías</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:list' %}">Proyectos</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#nosotros">Nosotros</a></li>
-          <li class="nav-item ms-lg-3">
-            <a class="btn btn-primary-neon" href="{% url 'core:home' %}#contacto">
-              <i class="bi bi-send me-1"></i>Contacto
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#cotizador"><i class="bi bi-calculator me-1 text-accent"></i>Cotizador</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#metodologia">Metodología</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#tecnologias">Stack</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:list' %}">Casos de Éxito</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a class="btn btn-primary-neon btn-sm px-3 py-2" href="{% url 'contact:contact' %}">
+              <i class="bi bi-chat-dots-fill me-1"></i>Contacto & Asesoría
             </a>
           </li>
         </ul>
@@ -50,75 +85,132 @@
     </div>
   </nav>
 
-  <!-- Main content -->
+  <!-- Mensajes y Toasts Flash -->
   {% if messages %}
-  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;margin-top:80px;">
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;margin-top:75px;">
     {% for message in messages %}
-    <div class="toast show align-items-center text-white bg-success border-0" role="alert">
+    <div class="toast show align-items-center text-white bg-dark border-accent shadow-lg mb-2" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
-        <div class="toast-body"><i class="bi bi-check-circle me-2"></i>{{ message }}</div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        <div class="toast-body d-flex align-items-center">
+          <i class="bi bi-check-circle-fill text-accent fs-5 me-2"></i>
+          <span>{{ message }}</span>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
     </div>
     {% endfor %}
   </div>
   {% endif %}
 
-  {% block content %}{% endblock %}
+  <!-- Contenido Principal -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
 
-  <!-- Footer -->
+  <!-- Botón Flotante Inteligente de WhatsApp -->
+  {% if site_config.clean_whatsapp_number %}
+  <a href="{{ site_config.get_whatsapp_url }}" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     class="whatsapp-float-btn" 
+     aria-label="Contactar por WhatsApp"
+     title="Chatea en vivo con nosotros">
+    <div class="whatsapp-pulse"></div>
+    <i class="bi bi-whatsapp"></i>
+    <span class="whatsapp-tooltip">¿Conversamos por WhatsApp?</span>
+  </a>
+  {% endif %}
+
+  <!-- Footer Corporativo -->
   <footer class="footer-section">
     <div class="footer-glow"></div>
     <div class="container">
       <div class="row g-4 py-5">
         <div class="col-lg-4">
-          <div class="footer-brand mb-3">
-            <img src="{% static 'images/logoNSC.png' %}" alt="Nexus Studio Code Logo" class="d-none d-md-inline-block" style="height:50px;">
+          <div class="footer-brand mb-3 d-flex align-items-center">
+            <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" style="height:44px;width:auto;" class="me-2">
+            <span class="fw-bold text-white fs-5">Nexus<span class="text-accent">Studio</span></span>
           </div>
-          <p class="text-muted mb-4">{{ site_config.tagline }}</p>
+          <p class="text-muted mb-4 pe-lg-4">{{ site_config.tagline|default:"Ingeniería de Software & Soluciones Digitales de Alto Impacto" }}</p>
           <div class="social-links">
             {% for social in social_links %}
             <a href="{{ social.url }}" target="_blank" rel="noopener" class="social-link" title="{{ social.platform }}">
               <i class="bi {{ social.get_icon }}"></i>
             </a>
+            {% empty %}
+            <a href="https://github.com" target="_blank" rel="noopener" class="social-link" title="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            {% if site_config.clean_whatsapp_number %}
+            <a href="{{ site_config.get_whatsapp_url }}" target="_blank" rel="noopener" class="social-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            {% endif %}
             {% endfor %}
           </div>
         </div>
+        
         <div class="col-lg-2 col-6">
           <h6 class="footer-title">Servicios</h6>
           <ul class="footer-links">
-            <li><a href="#">Desarrollo Web</a></li>
-            <li><a href="#">Sistemas de Gestión</a></li>
-            <li><a href="#">APIs & Backend</a></li>
-            <li><a href="#">Automatización</a></li>
+            <li><a href="{% url 'core:home' %}#servicios">Desarrollo Web & SaaS</a></li>
+            <li><a href="{% url 'core:home' %}#servicios">Sistemas ERP / CRM</a></li>
+            <li><a href="{% url 'core:home' %}#servicios">APIs & Backend</a></li>
+            <li><a href="{% url 'core:home' %}#servicios">Automatización & IA</a></li>
+            <li><a href="{% url 'core:home' %}#cotizador">Cotizador Online</a></li>
           </ul>
         </div>
+        
         <div class="col-lg-2 col-6">
           <h6 class="footer-title">Empresa</h6>
           <ul class="footer-links">
-            <li><a href="{% url 'core:home' %}#nosotros">Sobre Nosotros</a></li>
-            <li><a href="{% url 'portfolio:list' %}">Proyectos</a></li>
-            <li><a href="{% url 'core:home' %}#contacto">Contacto</a></li>
+            <li><a href="{% url 'core:home' %}#metodologia">Metodología Ágil</a></li>
+            <li><a href="{% url 'portfolio:list' %}">Casos de Éxito</a></li>
+            <li><a href="{% url 'core:home' %}#garantias">Garantías & NDA</a></li>
+            <li><a href="{% url 'core:home' %}#faq">Preguntas Frecuentes</a></li>
+            <li><a href="{% url 'contact:contact' %}">Contacto Directo</a></li>
           </ul>
         </div>
+        
         <div class="col-lg-4">
-          <h6 class="footer-title">Contacto</h6>
-          {% if site_config.email %}<p class="text-muted small mb-1"><i class="bi bi-envelope me-2 text-accent"></i>{{ site_config.email }}</p>{% endif %}
-          {% if site_config.phone %}<p class="text-muted small mb-1"><i class="bi bi-telephone me-2 text-accent"></i>{{ site_config.phone }}</p>{% endif %}
-          {% if site_config.address %}<p class="text-muted small"><i class="bi bi-geo-alt me-2 text-accent"></i>{{ site_config.address }}</p>{% endif %}
+          <h6 class="footer-title">Contacto Directo</h6>
+          {% if site_config.email %}
+          <p class="text-muted small mb-2">
+            <i class="bi bi-envelope-at-fill me-2 text-accent"></i>
+            <a href="mailto:{{ site_config.email }}" class="text-muted text-decoration-none hover-accent">{{ site_config.email }}</a>
+          </p>
+          {% endif %}
+          {% if site_config.phone or site_config.clean_whatsapp_number %}
+          <p class="text-muted small mb-2">
+            <i class="bi bi-whatsapp me-2 text-success"></i>
+            <a href="{{ site_config.get_whatsapp_url }}" target="_blank" rel="noopener" class="text-muted text-decoration-none hover-accent">{{ site_config.phone|default:site_config.clean_whatsapp_number }}</a>
+          </p>
+          {% endif %}
+          <p class="text-muted small mb-3">
+            <i class="bi bi-geo-alt-fill me-2 text-accent"></i>
+            {{ site_config.address|default:"Buenos Aires, Argentina (Servicios Globales)" }}
+          </p>
+
+          <div class="footer-badge mt-3 p-2 rounded text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <span class="small text-muted"><i class="bi bi-shield-check text-accent me-1"></i>Acuerdos de Confidencialidad (NDA) Garantizados</span>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center py-4 border-top border-dark">
+        <p class="text-muted small mb-2 mb-md-0">
+          &copy; {% now "Y" %} <strong>{{ site_config.company_name }}</strong>. Todos los derechos reservados.
+        </p>
         <p class="text-muted small mb-0">
-          &copy; {% now "Y" %} {{ site_config.company_name }}. Todos los derechos reservados.
-          <span class="ms-2">Desarrollado con <i class="bi bi-heart-fill text-accent"></i> en Argentina</span>
+          <span>Ingeniería de Software de Alto Impacto</span>
+          <span class="ms-2">· Hecho con <i class="bi bi-code-slash text-accent"></i> y precisión</span>
         </p>
       </div>
     </div>
   </footer>
 
+  <!-- Bootstrap 5 Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main Custom JS -->
   <script src="{% static 'js/main.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>
+

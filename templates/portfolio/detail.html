@@ -1,70 +1,165 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ project.title }} — Nexus Studio Code{% endblock %}
+
+{% block title %}{{ project.title }} — Caso de Estudio | {{ config.company_name }}{% endblock %}
+
 {% block content %}
-<section style="padding-top:100px;" class="section-pad">
+<section class="page-header-section pb-4">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
   <div class="container">
-    <nav aria-label="breadcrumb" class="mb-4">
+    
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4 reveal-up">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-accent">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'portfolio:list' %}" class="text-accent">Proyectos</a></li>
-        <li class="breadcrumb-item active">{{ project.title }}</li>
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-accent text-decoration-none">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'portfolio:list' %}" class="text-accent text-decoration-none">Casos de Éxito</a></li>
+        <li class="breadcrumb-item active text-muted" aria-current="page">{{ project.title }}</li>
       </ol>
     </nav>
-    <div class="row g-5">
-      <div class="col-lg-7">
-        {% if project.image %}
-        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid rounded-3 mb-4 shadow-lg" style="border:1px solid rgba(0,255,136,.15)">
+
+    <div class="case-detail-header reveal-up">
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+        <span class="badge bg-accent-subtle text-accent px-3 py-1 fw-bold fs-6">{{ project.get_category_display }}</span>
+        <span class="project-status status-{{ project.status }}">{{ project.get_status_display }}</span>
+        {% if project.completion_date %}
+        <span class="text-muted small"><i class="bi bi-calendar-event me-1"></i>Lanzamiento: {{ project.completion_date }}</span>
         {% endif %}
-        <h1 class="section-title">{{ project.title }}</h1>
-        <p class="text-muted">{{ project.description }}</p>
       </div>
-      <div class="col-lg-5">
-        <div class="contact-form-card">
-          <div class="project-status status-{{ project.status }} mb-3">{{ project.get_status_display }}</div>
-          <h5 class="mb-3">Detalles del proyecto</h5>
-          <div class="mb-3">
-            <strong class="d-block text-muted small mb-2">Tecnologías</strong>
-            <div class="project-techs">
+      
+      <h1 class="display-5 fw-bold text-white mb-3">{{ project.title }}</h1>
+      
+      {% if project.client_name %}
+      <p class="lead text-accent mb-0"><i class="bi bi-building me-2"></i>Cliente / Industria: <strong>{{ project.client_name }}</strong></p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<section class="section-pad pt-0">
+  <div class="container">
+    <div class="row g-5">
+      
+      <!-- Columna Principal: Caso de Estudio -->
+      <div class="col-lg-8">
+        
+        {% if project.image %}
+        <div class="case-featured-image-wrap mb-5 rounded-4 overflow-hidden shadow-2xl border border-dark">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid w-100 object-fit-cover" style="max-height:450px;">
+        </div>
+        {% endif %}
+
+        <!-- Resumen General -->
+        <div class="case-study-block mb-5 reveal-up">
+          <h3 class="text-white mb-3"><i class="bi bi-info-circle-fill text-accent me-2"></i>Visión General del Proyecto</h3>
+          <p class="text-muted fs-5 leading-relaxed">{{ project.description }}</p>
+        </div>
+
+        <!-- 1. El Desafío -->
+        {% if project.challenge %}
+        <div class="case-study-block mb-5 p-4 rounded-4 bg-dark-card border border-dark reveal-up">
+          <h4 class="text-warning mb-3"><i class="bi bi-exclamation-triangle-fill me-2"></i>El Desafío / Problema del Negocio</h4>
+          <p class="text-muted mb-0 leading-relaxed">{{ project.challenge }}</p>
+        </div>
+        {% endif %}
+
+        <!-- 2. La Solución Técnica -->
+        {% if project.solution %}
+        <div class="case-study-block mb-5 p-4 rounded-4 bg-dark-card border-accent-glow reveal-up">
+          <h4 class="text-accent mb-3"><i class="bi bi-cpu-fill me-2"></i>La Solución Técnica & Arquitectura</h4>
+          <p class="text-light mb-0 leading-relaxed">{{ project.solution }}</p>
+        </div>
+        {% endif %}
+
+        <!-- 3. Resultados y Métricas de Impacto -->
+        {% if project.results %}
+        <div class="case-study-block mb-5 p-4 rounded-4 bg-dark-card border-success-glow reveal-up">
+          <h4 class="text-success mb-3"><i class="bi bi-graph-up-arrow me-2"></i>Resultados & Métricas Obtenidas</h4>
+          <div class="text-white leading-relaxed" style="white-space: pre-line;">{{ project.results }}</div>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- Columna Lateral: Ficha Técnica & Acciones -->
+      <div class="col-lg-4">
+        <div class="case-sidebar-card p-4 rounded-4 shadow-2xl position-sticky" style="top: 100px;">
+          
+          <h4 class="text-white mb-4 border-bottom border-dark pb-3">Ficha Técnica</h4>
+
+          <!-- Tecnologías -->
+          <div class="mb-4">
+            <label class="d-block text-muted small fw-bold mb-2">STACK & HERRAMIENTAS</label>
+            <div class="d-flex flex-wrap gap-1">
               {% for tech in project.get_technologies_list %}
               <span class="tech-badge">{{ tech }}</span>
               {% endfor %}
             </div>
           </div>
+
+          <!-- Estado -->
+          <div class="mb-4">
+            <label class="d-block text-muted small fw-bold mb-1">ESTADO ACTUAL</label>
+            <span class="text-white">{{ project.get_status_display }}</span>
+          </div>
+
+          <!-- Enlaces -->
           {% if project.public_url %}
-          <a href="{{ project.public_url }}" target="_blank" class="btn btn-primary-neon w-100 mb-2">
-            <i class="bi bi-box-arrow-up-right me-2"></i>Ver proyecto online
-          </a>
+          <div class="mb-3">
+            <a href="{{ project.public_url }}" target="_blank" rel="noopener" class="btn btn-primary-neon w-100">
+              <i class="bi bi-box-arrow-up-right me-2"></i>Visitar Plataforma Online
+            </a>
+          </div>
           {% endif %}
+
           {% if project.github_url %}
-          <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-neon w-100">
-            <i class="bi bi-github me-2"></i>Ver código fuente
-          </a>
+          <div class="mb-4">
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="btn btn-outline-neon w-100">
+              <i class="bi bi-github me-2"></i>Ver Repositorio
+            </a>
+          </div>
           {% endif %}
+
+          <div class="cta-sidebar-box p-3 rounded-3 mt-4 text-center">
+            <h6 class="text-white mb-2">¿Quieres una solución similar?</h6>
+            <p class="small text-muted mb-3">Diseñamos una arquitectura a la medida exacta de tu negocio.</p>
+            <a href="{% url 'core:home' %}#cotizador" class="btn btn-outline-neon w-100 btn-sm">
+              <i class="bi bi-calculator me-1"></i>Cotizar Ahora
+            </a>
+          </div>
+
         </div>
       </div>
+
     </div>
+
+    <!-- Proyectos Relacionados -->
     {% if related %}
-    <div class="mt-5 pt-4 border-top" style="border-color:rgba(0,255,136,.1) !important">
-      <h4 class="mb-4">Otros proyectos</h4>
+    <div class="related-projects-section mt-5 pt-5 border-top border-dark">
+      <h3 class="text-white mb-4">Otros Casos de Éxito</h3>
       <div class="row g-4">
         {% for p in related %}
         <div class="col-md-4">
-          <div class="project-card">
-            <div class="project-image-wrap">
-              {% if p.image %}<img src="{{ p.image.url }}" class="project-image" loading="lazy">
-              {% else %}<div class="project-image-placeholder"><i class="bi bi-code-square"></i></div>{% endif %}
+          <div class="case-study-card h-100">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-accent-subtle text-accent small">{{ p.get_category_display }}</span>
+              <span class="small text-muted">{{ p.completion_date }}</span>
             </div>
-            <div class="project-body">
-              <h5 class="project-title">{{ p.title }}</h5>
-              <a href="{% url 'portfolio:detail' p.slug %}" class="service-cta">Ver más <i class="bi bi-arrow-right ms-1"></i></a>
-            </div>
+            <h5 class="text-white mb-2">
+              <a href="{% url 'portfolio:detail' p.slug %}" class="text-white text-decoration-none hover-accent">{{ p.title }}</a>
+            </h5>
+            <p class="small text-muted mb-3">{{ p.short_description|default:p.description|truncatechars:90 }}</p>
+            <a href="{% url 'portfolio:detail' p.slug %}" class="service-cta small mt-auto">
+              Ver Caso <i class="bi bi-arrow-right ms-1"></i>
+            </a>
           </div>
         </div>
         {% endfor %}
       </div>
     </div>
     {% endif %}
+
   </div>
 </section>
 {% endblock %}

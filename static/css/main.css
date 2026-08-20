@@ -931,9 +931,438 @@ body {
 .reveal-right { transform: translateX(40px); }
 .revealed     { opacity: 1 !important; transform: none !important; }
 
-/* ─── BREADCRUMB ──────────────────────────────────────── */
+/* ─── BREADCRUMB & HEADERS ────────────────────────────── */
 .breadcrumb-item.active { color: var(--text-muted); }
 .breadcrumb-item + .breadcrumb-item::before { color: var(--text-muted); }
+.page-header-section {
+  padding-top: 130px;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+/* ─── HERO CODE TABS & ACTIONS ────────────────────────── */
+.code-tabs {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.code-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.code-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+.code-tab-btn.active {
+  color: var(--accent);
+  background: var(--accent-glow);
+  font-weight: 600;
+}
+.btn-copy-code {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-copy-code:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+/* ─── COTIZADOR INTERACTIVO (LEAD MAGNET) ─────────────── */
+.quote-calculator-section {
+  background: radial-gradient(circle at 50% 30%, rgba(var(--accent-h), 100%, 50%, 0.05), transparent 70%), var(--bg-darkest);
+}
+.quote-glow-bg {
+  position: absolute;
+  top: 10%; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 350px;
+  background: radial-gradient(circle, var(--accent-glow-med), transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+.quote-card-container {
+  background: rgba(13, 21, 32, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-glow-xfaint);
+}
+.step-badge {
+  background: var(--accent-glow);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Quote Option Cards (Radio & Checkbox) */
+.quote-option-card, .quote-checkbox-card, .quote-timeline-card {
+  display: block;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+.quote-option-card input, .quote-checkbox-card input, .quote-timeline-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.quote-option-card .option-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: var(--transition);
+  height: 100%;
+}
+.quote-option-card .option-icon {
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.quote-option-card input:checked + .option-content {
+  border-color: var(--accent);
+  background: var(--accent-glow-faint);
+  box-shadow: 0 0 20px var(--accent-glow-med);
+  transform: translateY(-2px);
+}
+.quote-option-card input:checked + .option-content .option-icon {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Checkbox Cards */
+.quote-checkbox-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+  height: 100%;
+}
+.quote-checkbox-card .checkbox-box {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card-hover);
+  display: flex; align-items: center; justify-content: center;
+  color: transparent;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.quote-checkbox-card:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-glow-faint);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+.quote-checkbox-card:has(input:checked) .checkbox-box {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+/* Timeline Cards */
+.quote-timeline-card .timeline-body {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+.quote-timeline-card input:checked + .timeline-body {
+  border-color: var(--accent);
+  background: var(--accent-glow-faint);
+  box-shadow: 0 0 20px var(--accent-glow-med);
+  transform: translateY(-2px);
+}
+
+/* Live Result Box */
+.quote-live-result-box {
+  background: linear-gradient(135deg, rgba(var(--accent-h), 100%, 50%, 0.12), rgba(13, 21, 32, 0.95));
+  border: 1px solid var(--border-hover);
+  box-shadow: inset 0 0 20px var(--accent-glow);
+}
+
+/* ─── METODOLOGÍA TIMELINE ────────────────────────────── */
+.process-step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px 24px;
+  position: relative;
+  transition: var(--transition);
+}
+.process-step-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+}
+.step-num-badge {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: .8;
+  margin-bottom: 12px;
+}
+.step-icon {
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+.step-title {
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* ─── STACK TABS POR CAPAS ────────────────────────────── */
+.tech-tabs-nav .tech-tab-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.tech-tabs-nav .tech-tab-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+.tech-tabs-nav .tech-tab-btn.active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+.tech-category-badge {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ─── GARANTÍAS & DIFERENCIALES ───────────────────────── */
+.guarantee-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px 24px;
+  transition: var(--transition);
+}
+.guarantee-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-glow);
+}
+.guarantee-icon {
+  font-size: 2.2rem;
+}
+
+/* ─── CASOS DE ESTUDIO (PORTAFOLIO) ───────────────────── */
+.case-study-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+.case-study-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px var(--accent-glow);
+}
+.case-results-box {
+  background: rgba(0, 255, 136, 0.04);
+  border: 1px dashed rgba(0, 255, 136, 0.25);
+}
+.tech-badge-sm {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+.category-filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.category-filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+.category-filter-btn.active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* ─── ACORDEÓN FAQ CUSTOM ─────────────────────────────── */
+.custom-accordion .accordion-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+}
+.custom-accordion .accordion-button {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 20px 24px;
+  box-shadow: none !important;
+}
+.custom-accordion .accordion-button:not(.collapsed) {
+  color: var(--accent) !important;
+  border-bottom: 1px solid var(--border);
+  background: var(--accent-glow-faint) !important;
+}
+.custom-accordion .accordion-button::after {
+  filter: invert(1);
+}
+.custom-accordion .accordion-body {
+  padding: 24px;
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+/* ─── BOTÓN FLOTANTE DE WHATSAPP ──────────────────────── */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  color: #fff !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.whatsapp-float-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
+}
+.whatsapp-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.6;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  z-index: -1;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.whatsapp-tooltip {
+  position: absolute;
+  right: 75px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.whatsapp-float-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+  right: 70px;
+}
+
+/* ─── CONTACT CHANNELS & CARDS ────────────────────────── */
+.contact-channel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+}
+.contact-channel-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+}
+.channel-icon { font-size: 1.8rem; }
+.channel-label { font-size: 0.78rem; color: var(--text-muted); display: block; text-transform: uppercase; }
+.channel-link { color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.channel-link:hover { color: var(--accent); }
+.guarantee-box {
+  background: var(--accent-glow-faint);
+  border: 1px solid var(--border);
+}
+.mini-faq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.cta-banner-card {
+  background: radial-gradient(circle at 50% 50%, var(--accent-glow-med), transparent 70%), var(--bg-card);
+  border: 1px solid var(--border-hover);
+}
+.case-sidebar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.bg-accent-subtle {
+  background: var(--accent-glow) !important;
+}
 
 /* ─── RESPONSIVE ──────────────────────────────────────── */
 @media (max-width: 991px) {
@@ -941,10 +1370,13 @@ body {
   .floating-card { display: none; }
   .about-years-badge { bottom: -10px; right: 16px; }
   .contact-form-card { padding: 24px; }
+  .whatsapp-tooltip { display: none; }
 }
 @media (max-width: 767px) {
   .section-pad { padding: 64px 0; }
   .hero-title  { font-size: 2.2rem; }
   .code-window { font-size: 0.75rem; }
-  .tech-grid   { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+  .tech-grid   { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .whatsapp-float-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 26px; }
 }
+

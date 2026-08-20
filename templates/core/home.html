@@ -3,99 +3,185 @@
 
 {% block content %}
 
-<!-- ===== HERO ===== -->
-<section class="hero-section" id="inicio">
+<!-- =================================================================
+     1. HERO SECTION (ULTRA-TECH B2B AGENCY)
+     ================================================================= -->
+<section class="hero-section position-relative" id="inicio">
   <div class="hero-bg-grid"></div>
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
-  <div class="container">
-    <div class="row min-vh-100 align-items-center">
-      <div class="col-lg-6 hero-content">
+  
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row min-vh-100 align-items-center py-5">
+      
+      <!-- Contenido Textual Hero -->
+      <div class="col-lg-6 hero-content mb-5 mb-lg-0">
         <div class="hero-badge mb-3 reveal-up">
-          <span class="badge-dot"></span>
-          <span>Disponibles para nuevos proyectos</span>
+          <span class="badge-dot pulse-glow"></span>
+          <span>{{ config.hero_badge_text|default:"🚀 Disponibles para nuevos proyectos & sprints" }}</span>
         </div>
-        <h1 class="hero-title reveal-up" style="animation-delay:.1s">
-          {{ config.hero_title }}
+        
+        <h1 class="hero-title reveal-up" style="animation-delay: .1s">
+          {{ config.hero_title|default:"Desarrollo de Software a Medida de Alto Impacto" }}
         </h1>
-        <p class="hero-subtitle reveal-up" style="animation-delay:.2s">
-          {{ config.hero_subtitle }}
+        
+        <p class="hero-subtitle reveal-up" style="animation-delay: .2s">
+          {{ config.hero_subtitle|default:"Diseñamos y desarrollamos plataformas web, aplicaciones SaaS, APIs robustas y sistemas de gestión para empresas y startups que buscan liderar su industria." }}
         </p>
-        <div class="hero-actions reveal-up" style="animation-delay:.3s">
-          <a href="#contacto" class="btn btn-primary-neon btn-lg me-3">
-            <i class="bi bi-rocket-takeoff me-2"></i>Solicitar presupuesto
+        
+        <div class="hero-actions d-flex flex-wrap gap-3 reveal-up" style="animation-delay: .3s">
+          <a href="#cotizador" class="btn btn-primary-neon btn-lg">
+            <i class="bi bi-calculator me-2"></i>Cotizar mi Proyecto
           </a>
           <a href="{% url 'portfolio:list' %}" class="btn btn-outline-neon btn-lg">
-            <i class="bi bi-grid-3x3-gap me-2"></i>Ver proyectos
+            <i class="bi bi-grid-3x3-gap-fill me-2"></i>Casos de Éxito
           </a>
         </div>
-        <div class="hero-tech-stack reveal-up" style="animation-delay:.4s">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Django</span>
-          <span class="tech-pill">PostgreSQL</span>
-          <span class="tech-pill">Docker</span>
-          <span class="tech-pill">APIs REST</span>
+        
+        <!-- Píldoras de stack rápido -->
+        <div class="hero-tech-stack mt-4 reveal-up" style="animation-delay: .4s">
+          <span class="tech-pill"><i class="bi bi-shield-check text-accent me-1"></i>100% Código Propio</span>
+          <span class="tech-pill"><i class="bi bi-clock-history text-info me-1"></i>Sprints Quincenales</span>
+          <span class="tech-pill"><i class="bi bi-award-fill text-warning me-1"></i>Garantía Técnica</span>
         </div>
       </div>
-      <div class="col-lg-6 hero-visual reveal-right" style="animation-delay:.2s">
-        <div class="code-window">
-          <div class="code-window-bar">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-            <span class="window-title">nexus_app/views.py</span>
-          </div>
-          <div class="code-content">
-            <pre class="code-block"><code><span class="code-keyword">from</span> <span class="code-module">django.shortcuts</span> <span class="code-keyword">import</span> render
-<span class="code-keyword">from</span> <span class="code-module">rest_framework</span> <span class="code-keyword">import</span> viewsets
+      
+      <!-- Visual Interactivo Hero: IDE Multiactivo -->
+      <div class="col-lg-6 hero-visual reveal-right" style="animation-delay: .2s">
+        <div class="code-window shadow-2xl">
+          <!-- Barra superior del editor -->
+          <div class="code-window-bar d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            
+            <!-- Pestañas de archivos -->
+            <div class="code-tabs d-flex align-items-center gap-1" id="heroCodeTabs">
+              <button type="button" class="code-tab-btn active" data-tab="backend">
+                <i class="bi bi-filetype-py me-1 text-info"></i>app/api.py
+              </button>
+              <button type="button" class="code-tab-btn" data-tab="models">
+                <i class="bi bi-database me-1 text-warning"></i>models/saas.py
+              </button>
+              <button type="button" class="code-tab-btn" data-tab="architecture">
+                <i class="bi bi-filetype-json me-1 text-success"></i>deploy.json
+              </button>
+            </div>
 
-<span class="code-decorator">@api_view</span><span class="code-paren">([</span><span class="code-string">'GET'</span><span class="code-paren">])</span>
-<span class="code-keyword">def</span> <span class="code-func">build_solution</span><span class="code-paren">(</span>request<span class="code-paren">)</span>:
-    <span class="code-string">"""
-    Transformamos tus ideas
-    en software de alto impacto.
-    """</span>
-    solution <span class="code-op">=</span> <span class="code-paren">{</span>
-        <span class="code-string">'quality'</span>: <span class="code-string">'premium'</span>,
-        <span class="code-string">'scalable'</span>: <span class="code-keyword">True</span>,
-        <span class="code-string">'on_time'</span>: <span class="code-keyword">True</span>,
-        <span class="code-string">'stack'</span>: <span class="code-paren">[</span><span class="code-string">'Python'</span>, <span class="code-string">'Django'</span><span class="code-paren">]</span>
-    <span class="code-paren">}</span>
-    <span class="code-keyword">return</span> Response<span class="code-paren">(</span>solution<span class="code-paren">)</span>  <span class="code-comment"># ✓ 200 OK</span></code></pre>
+            <div class="window-actions">
+              <button class="btn btn-copy-code" id="copyCodeBtn" title="Copiar código">
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
           </div>
-          <div class="code-cursor-line">
+          
+          <!-- Contenido de las pestañas -->
+          <div class="code-content position-relative">
+            <!-- TAB 1: API.PY -->
+            <div class="tab-pane-code active" id="code-tab-backend">
+              <pre class="code-block"><code><span class="code-keyword">from</span> <span class="code-module">fastapi</span> <span class="code-keyword">import</span> FastAPI, Depends
+<span class="code-keyword">from</span> <span class="code-module">nexus_core</span> <span class="code-keyword">import</span> HighPerformanceEngine
+
+app = FastAPI<span class="code-paren">(</span>title=<span class="code-string">"Enterprise SaaS API"</span>, version=<span class="code-string">"2.0"</span><span class="code-paren">)</span>
+
+<span class="code-decorator">@app.post</span><span class="code-paren">(</span><span class="code-string">"/api/v1/build-solution"</span><span class="code-paren">)</span>
+<span class="code-keyword">async def</span> <span class="code-func">create_enterprise_platform</span><span class="code-paren">(</span>client_scope: <span class="code-func">dict</span><span class="code-paren">)</span>:
+    <span class="code-string">"""
+    Genera arquitectura modular, escalable y
+    100% testeada para tu modelo de negocio.
+    """</span>
+    engine = HighPerformanceEngine<span class="code-paren">(</span><span class="code-keyword">async_mode</span>=<span class="code-keyword">True</span><span class="code-paren">)</span>
+    solution = <span class="code-keyword">await</span> engine.deploy_sprint<span class="code-paren">(</span>
+        stack=[<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>, <span class="code-string">"PostgreSQL"</span>, <span class="code-string">"React"</span>],
+        clean_code=<span class="code-keyword">True</span>,
+        sla_uptime=<span class="code-string">"99.99%"</span>,
+        nda_protected=<span class="code-keyword">True</span>
+    <span class="code-paren">)</span>
+    <span class="code-keyword">return</span> <span class="code-paren">{</span>
+        <span class="code-string">"status"</span>: <span class="code-string">"200 OK"</span>,
+        <span class="code-string">"latency_ms"</span>: 24,
+        <span class="code-string">"ready_for_production"</span>: <span class="code-keyword">True</span>
+    <span class="code-paren">}</span></code></pre>
+            </div>
+
+            <!-- TAB 2: MODELS.PY -->
+            <div class="tab-pane-code d-none" id="code-tab-models">
+              <pre class="code-block"><code><span class="code-keyword">from</span> <span class="code-module">django.db</span> <span class="code-keyword">import</span> models
+
+<span class="code-keyword">class</span> <span class="code-func">EnterpriseProject</span><span class="code-paren">(</span>models.Model<span class="code-paren">)</span>:
+    client_company = models.CharField<span class="code-paren">(</span>max_length=120<span class="code-paren">)</span>
+    architecture_type = models.CharField<span class="code-paren">(</span>default=<span class="code-string">"Microservices / Cloud"</span><span class="code-paren">)</span>
+    code_ownership = models.CharField<span class="code-paren">(</span>default=<span class="code-string">"100% Client Intellectual Property"</span><span class="code-paren">)</span>
+    sprint_delivery = models.BooleanField<span class="code-paren">(</span>default=<span class="code-keyword">True</span><span class="code-paren">)</span>
+    security_audited = models.BooleanField<span class="code-paren">(</span>default=<span class="code-keyword">True</span><span class="code-paren">)</span>
+
+    <span class="code-keyword">def</span> <span class="code-func">deploy_to_cloud</span><span class="code-paren">(</span>self<span class="code-paren">)</span>:
+        <span class="code-keyword">return</span> f<span class="code-string">"Live on AWS/Docker in &lt; 2 weeks"</span></code></pre>
+            </div>
+
+            <!-- TAB 3: DEPLOY.JSON -->
+            <div class="tab-pane-code d-none" id="code-tab-architecture">
+              <pre class="code-block"><code><span class="code-paren">{</span>
+  <span class="code-string">"infrastructure"</span>: <span class="code-string">"Docker & AWS ECS"</span>,
+  <span class="code-string">"database"</span>: <span class="code-string">"PostgreSQL High Availability"</span>,
+  <span class="code-string">"cache_layer"</span>: <span class="code-string">"Redis Cluster"</span>,
+  <span class="code-string">"ci_cd"</span>: <span class="code-string">"GitHub Actions Automated Tests"</span>,
+  <span class="code-string">"security"</span>: <span class="code-paren">{</span>
+    <span class="code-string">"ssl_tls"</span>: <span class="code-string">"Strict 1.3"</span>,
+    <span class="code-string">"waf_protection"</span>: <span class="code-keyword">true</span>,
+    <span class="code-string">"rate_limiting"</span>: <span class="code-string">"Enabled"</span>
+  <span class="code-paren">}</span>,
+  <span class="code-string">"monitoring"</span>: <span class="code-string">"24/7 Prometheus + Sentry"</span>
+<span class="code-paren">}</span></code></pre>
+            </div>
+          </div>
+          
+          <div class="code-cursor-line d-flex align-items-center justify-content-between px-3 py-1">
+            <span class="small text-muted font-monospace"><i class="bi bi-git me-1"></i>branch: production · UTF-8</span>
             <span class="code-cursor"></span>
           </div>
         </div>
-        <!-- Floating cards -->
+        
+        <!-- Badges flotantes interactivos -->
         <div class="floating-card card-1">
-          <i class="bi bi-check-circle-fill text-success me-2"></i>Entrega en tiempo
+          <i class="bi bi-shield-lock-fill text-accent me-2"></i>NDA & Código 100% Tuyo
         </div>
         <div class="floating-card card-2">
-          <i class="bi bi-shield-fill-check text-accent me-2"></i>Código limpio
+          <i class="bi bi-rocket-takeoff-fill text-warning me-2"></i>Entregas en Sprints
         </div>
         <div class="floating-card card-3">
-          <i class="bi bi-arrow-up-circle-fill text-info me-2"></i>Escalable
+          <i class="bi bi-check2-all text-info me-2"></i>Tests & Uptime 99.9%
         </div>
       </div>
+
     </div>
   </div>
-  <div class="hero-scroll-hint">
-    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  
+  <div class="hero-scroll-hint text-center">
+    <a href="#servicios" class="scroll-link" aria-label="Desplazar hacia abajo">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    </a>
   </div>
 </section>
 
-<!-- ===== ESTADÍSTICAS ===== -->
+
+<!-- =================================================================
+     2. ESTADÍSTICAS & MÉTRICAS DE IMPACTO
+     ================================================================= -->
 {% if stats %}
-<section class="stats-section">
+<section class="stats-section py-5">
   <div class="container">
     <div class="row g-4 justify-content-center">
       {% for stat in stats %}
       <div class="col-6 col-md-3">
-        <div class="stat-card reveal-up">
-          <div class="stat-icon"><i class="bi {{ stat.icon }}"></i></div>
-          <div class="stat-number" data-target="{{ stat.value }}">0</div>
-          <div class="stat-suffix">{{ stat.suffix }}</div>
+        <div class="stat-card reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+          <div class="stat-icon mb-2"><i class="bi {{ stat.icon }}"></i></div>
+          <div class="stat-number-wrap d-flex align-items-baseline justify-content-center">
+            <span class="stat-number" data-target="{{ stat.value }}">0</span>
+            <span class="stat-suffix">{{ stat.suffix }}</span>
+          </div>
           <div class="stat-label">{{ stat.label }}</div>
         </div>
       </div>
@@ -105,27 +191,49 @@
 </section>
 {% endif %}
 
-<!-- ===== SERVICIOS ===== -->
-<section class="section-pad" id="servicios">
+
+<!-- =================================================================
+     3. SERVICIOS ESPECIALIZADOS (SOFTWARE FACTORY)
+     ================================================================= -->
+<section class="section-pad position-relative" id="servicios">
   <div class="container">
     <div class="section-header text-center mb-5">
-      <span class="section-tag reveal-up">Lo que hacemos</span>
-      <h2 class="section-title reveal-up">Nuestros Servicios</h2>
-      <p class="section-subtitle reveal-up">Soluciones tecnológicas diseñadas para impulsar tu negocio</p>
+      <span class="section-tag reveal-up">Especialidades Técnicas</span>
+      <h2 class="section-title reveal-up">Servicios de Desarrollo de Software</h2>
+      <p class="section-subtitle reveal-up">Soluciones de ingeniería a medida, diseñadas con los más altos estándares de rendimiento y seguridad.</p>
     </div>
+    
     <div class="row g-4">
       {% for service in services %}
       <div class="col-md-6 col-lg-4">
-        <div class="service-card reveal-up {% if service.highlight %}service-featured{% endif %}" style="animation-delay:{{ forloop.counter0|floatformat:1 }}00ms">
-          {% if service.highlight %}<div class="featured-badge">Más solicitado</div>{% endif %}
+        <div class="service-card h-100 reveal-up {% if service.highlight %}service-featured{% endif %}" style="animation-delay:{{ forloop.counter0 }}00ms">
+          {% if service.highlight %}
+          <div class="featured-badge"><i class="bi bi-star-fill me-1"></i>Alta Demanda</div>
+          {% endif %}
+          
           <div class="service-icon-wrap">
             <i class="bi {{ service.icon }}"></i>
           </div>
+          
           <h3 class="service-title">{{ service.title }}</h3>
           <p class="service-desc">{{ service.description }}</p>
-          <a href="#contacto" class="service-cta">
-            Consultar <i class="bi bi-arrow-right ms-1"></i>
-          </a>
+          
+          {% if service.get_features %}
+          <ul class="service-features list-unstyled my-3">
+            {% for feat in service.get_features %}
+            <li class="d-flex align-items-start mb-2 small text-muted">
+              <i class="bi bi-check2 text-accent me-2 fs-6 flex-shrink-0 mt-1"></i>
+              <span>{{ feat }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          
+          <div class="mt-auto pt-3 border-top border-dark d-flex justify-content-between align-items-center">
+            <a href="#cotizador" class="service-cta">
+              Cotizar este servicio <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -133,172 +241,509 @@
   </div>
 </section>
 
-<!-- ===== TECNOLOGÍAS ===== -->
-<section class="tech-section section-pad" id="tecnologias">
+
+<!-- =================================================================
+     4. COTIZADOR INTERACTIVO DE PROYECTOS (LEAD MAGNET)
+     ================================================================= -->
+<section class="quote-calculator-section section-pad position-relative" id="cotizador">
+  <div class="quote-glow-bg"></div>
+  <div class="container position-relative" style="z-index: 2;">
+    
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up"><i class="bi bi-calculator me-1"></i>Estimador en Tiempo Real</span>
+      <h2 class="section-title reveal-up">Calcula el Presupuesto de tu Proyecto</h2>
+      <p class="section-subtitle reveal-up">Selecciona las especificaciones de tu plataforma y recibe una estimación instantánea y una propuesta arquitectónica sin costo.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="quote-card-container p-4 p-md-5 rounded-4 shadow-2xl reveal-up">
+          
+          <form id="quoteCalculatorForm" method="post" action="{% url 'core:quote_request' %}">
+            {% csrf_token %}
+            
+            <!-- PASO 1: Tipo de Proyecto -->
+            <div class="quote-step mb-5" data-step="1">
+              <div class="d-flex align-items-center mb-3">
+                <span class="step-badge me-2">Paso 1</span>
+                <h4 class="text-white mb-0">¿Qué tipo de solución necesitas construir?</h4>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Plataforma SaaS / Web App" data-base-price="1800" data-base-weeks="4" checked>
+                    <div class="option-content">
+                      <i class="bi bi-globe2 option-icon"></i>
+                      <div class="option-text">
+                        <strong>Web App / SaaS</strong>
+                        <span class="small text-muted d-block">Suscripciones, usuarios, dashboards</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Sistema de Gestión / ERP / CRM" data-base-price="2200" data-base-weeks="6">
+                    <div class="option-content">
+                      <i class="bi bi-gear-wide-connected option-icon"></i>
+                      <div class="option-text">
+                        <strong>Sistema ERP / CRM</strong>
+                        <span class="small text-muted d-block">Stock, facturación, operaciones</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Arquitectura Backend & APIs REST" data-base-price="1400" data-base-weeks="3">
+                    <div class="option-content">
+                      <i class="bi bi-server option-icon"></i>
+                      <div class="option-text">
+                        <strong>APIs & Microservicios</strong>
+                        <span class="small text-muted d-block">Conexión de apps y backend robusto</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Aplicación Móvil (iOS / Android)" data-base-price="2500" data-base-weeks="6">
+                    <div class="option-content">
+                      <i class="bi bi-phone-fill option-icon"></i>
+                      <div class="option-text">
+                        <strong>App Móvil</strong>
+                        <span class="small text-muted d-block">Multiplataforma iOS & Android</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Automatización con Inteligencia Artificial" data-base-price="1600" data-base-weeks="3">
+                    <div class="option-content">
+                      <i class="bi bi-cpu-fill option-icon"></i>
+                      <div class="option-text">
+                        <strong>Automatización & IA</strong>
+                        <span class="small text-muted d-block">Integración LLMs, RAG, agentes</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-option-card">
+                    <input type="radio" name="project_type" value="Desarrollo a Medida Personalizado" data-base-price="2000" data-base-weeks="4">
+                    <div class="option-content">
+                      <i class="bi bi-code-slash option-icon"></i>
+                      <div class="option-text">
+                        <strong>A Medida (Custom)</strong>
+                        <span class="small text-muted d-block">Requerimiento específico</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- PASO 2: Módulos y Funcionalidades -->
+            <div class="quote-step mb-5" data-step="2">
+              <div class="d-flex align-items-center mb-3">
+                <span class="step-badge me-2">Paso 2</span>
+                <h4 class="text-white mb-0">¿Qué módulos o funcionalidades debe incluir?</h4>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Autenticación y Roles Granulares" data-price="250" data-weeks="0.5" checked>
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>Autenticación & Permisos</strong>
+                      <span class="small text-muted d-block">Login, 2FA, perfiles de usuario</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Pasarela de Pagos & Facturación" data-price="450" data-weeks="1" checked>
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>Pasarela de Pagos</strong>
+                      <span class="small text-muted d-block">Stripe, MercadoPago, suscripciones</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Panel de Control & Reportes Avanzados" data-price="350" data-weeks="0.5" checked>
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>Dashboard de Métricas</strong>
+                      <span class="small text-muted d-block">Gráficos, exportación Excel / PDF</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Integración con IA y LLMs" data-price="500" data-weeks="1">
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>Módulo de IA / LLMs</strong>
+                      <span class="small text-muted d-block">Chatbots, búsqueda semántica, RAG</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Notificaciones en Tiempo Real y WhatsApp" data-price="300" data-weeks="0.5">
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>WhatsApp & Notificaciones</strong>
+                      <span class="small text-muted d-block">Emails transaccionales, WhatsApp API</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <label class="quote-checkbox-card">
+                    <input type="checkbox" name="features" value="Despliegue Cloud y CI/CD Automatizado" data-price="350" data-weeks="0.5">
+                    <div class="checkbox-box"><i class="bi bi-check"></i></div>
+                    <div class="checkbox-label">
+                      <strong>DevOps & Cloud Setup</strong>
+                      <span class="small text-muted d-block">AWS / Docker, backups, SSL</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- PASO 3: Plazo de Entrega -->
+            <div class="quote-step mb-5" data-step="3">
+              <div class="d-flex align-items-center mb-3">
+                <span class="step-badge me-2">Paso 3</span>
+                <h4 class="text-white mb-0">¿En qué plazo estimas el lanzamiento?</h4>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="quote-timeline-card">
+                    <input type="radio" name="timeline" value="Estándar (Sprints progresivos)" data-multiplier="1.0" checked>
+                    <div class="timeline-body">
+                      <strong>📅 Estándar</strong>
+                      <span class="small text-muted d-block">Ritmo regular de sprints</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label class="quote-timeline-card">
+                    <input type="radio" name="timeline" value="Prioritario (Sprint acelerado)" data-multiplier="1.15">
+                    <div class="timeline-body">
+                      <strong>⚡ Prioritario</strong>
+                      <span class="small text-muted d-block">Dedicación exclusiva intensiva</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label class="quote-timeline-card">
+                    <input type="radio" name="timeline" value="Planificación abierta (+2 meses)" data-multiplier="0.95">
+                    <div class="timeline-body">
+                      <strong>🛠️ Flexible</strong>
+                      <span class="small text-muted d-block">Desarrollo por fases modulares</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- TARJETA EN VIVO DE ESTIMACIÓN DE INVERSIÓN -->
+            <div class="quote-live-result-box p-4 rounded-4 mb-5">
+              <div class="row align-items-center">
+                <div class="col-md-7 mb-3 mb-md-0">
+                  <span class="badge bg-accent-subtle text-accent mb-2 px-3 py-1 fw-bold">Estimación Orientativa en Tiempo Real</span>
+                  <div class="d-flex align-items-baseline gap-2">
+                    <h3 class="display-6 fw-bold text-white mb-0" id="estimatedCostDisplay">USD $2,850 - $3,450</h3>
+                  </div>
+                  <p class="small text-muted mb-0 mt-1" id="estimatedTimelineDisplay">
+                    <i class="bi bi-clock-history text-accent me-1"></i>Tiempo estimado de desarrollo: <strong>5 a 6 semanas</strong>
+                  </p>
+                </div>
+                <div class="col-md-5 text-md-end">
+                  <span class="badge bg-dark border border-secondary p-2 mb-2 d-inline-block small text-light">
+                    <i class="bi bi-shield-check text-success me-1"></i>Sin compromiso · NDA disponible
+                  </span>
+                  <p class="small text-muted mb-0">Incluye código fuente 100% transferido y garantía técnica.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- PASO 4: Datos de Contacto y Envío -->
+            <div class="quote-step" data-step="4">
+              <div class="d-flex align-items-center mb-3">
+                <span class="step-badge me-2">Paso 4</span>
+                <h4 class="text-white mb-0">¿A dónde te enviamos la propuesta arquitectónica detallada?</h4>
+              </div>
+
+              <!-- Inputs ocultos para enviar el resumen calculado -->
+              <input type="hidden" name="estimated_cost" id="hiddenEstimatedCost" value="">
+              <input type="hidden" name="budget_range" id="hiddenBudgetRange" value="">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small text-light">Tu Nombre y Apellido <span class="text-accent">*</span></label>
+                  <input type="text" name="name" class="form-control" placeholder="Ej: Lucas González" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small text-light">Email Corporativo o Personal <span class="text-accent">*</span></label>
+                  <input type="email" name="email" class="form-control" placeholder="lucas@empresa.com" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small text-light">Teléfono / WhatsApp</label>
+                  <input type="text" name="phone" class="form-control" placeholder="+54 9 11 1234-5678">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small text-light">Empresa / Proyecto</label>
+                  <input type="text" name="company" class="form-control" placeholder="Nombre de tu empresa o startup">
+                </div>
+                <div class="col-12">
+                  <label class="form-label small text-light">Detalles adicionales o requerimientos clave (opcional)</label>
+                  <textarea name="description" rows="3" class="form-control" placeholder="Cuéntanos brevemente qué problema quieres resolver o si tienes diseños previos..."></textarea>
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="submit" id="quoteSubmitBtn" class="btn btn-primary-neon btn-lg w-100 py-3 fs-5">
+                    <i class="bi bi-send-check-fill me-2"></i>Solicitar Propuesta Formal & Arquitectura
+                  </button>
+                  <p class="text-center text-muted small mt-2 mb-0">
+                    <i class="bi bi-lock-fill me-1"></i>Tus datos están protegidos. Respuesta garantizada en menos de 24 horas.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =================================================================
+     5. METODOLOGÍA DE TRABAJO ÁGIL (CÓMO TRABAJAMOS)
+     ================================================================= -->
+{% if process_steps %}
+<section class="process-section section-pad position-relative" id="metodologia">
   <div class="container">
     <div class="section-header text-center mb-5">
-      <span class="section-tag reveal-up">Stack técnico</span>
-      <h2 class="section-title reveal-up">Tecnologías que dominamos</h2>
-      <p class="section-subtitle reveal-up">Herramientas modernas para soluciones robustas y escalables</p>
+      <span class="section-tag reveal-up">Flujo de Ingeniería</span>
+      <h2 class="section-title reveal-up">Nuestra Metodología de Trabajo</h2>
+      <p class="section-subtitle reveal-up">Proceso transparente, ágil y predecible desde la primera reunión hasta el soporte en producción.</p>
     </div>
-    <div class="tech-grid">
+
+    <div class="process-timeline-container reveal-up">
+      <div class="row g-4">
+        {% for step in process_steps %}
+        <div class="col-lg">
+          <div class="process-step-card h-100">
+            <div class="step-num-badge">{{ step.step_number }}</div>
+            <div class="step-icon mb-3">
+              <i class="bi {{ step.icon }}"></i>
+            </div>
+            <h4 class="step-title">{{ step.title }}</h4>
+            {% if step.subtitle %}
+            <span class="step-subtitle d-block mb-2 text-accent small fw-bold">{{ step.subtitle }}</span>
+            {% endif %}
+            <p class="step-desc small text-muted mb-0">{{ step.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+<!-- =================================================================
+     6. STACK TECNOLÓGICO CATEGORIZADO POR CAPAS
+     ================================================================= -->
+<section class="tech-section section-pad position-relative" id="tecnologias">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Stack de Nivel Mundial</span>
+      <h2 class="section-title reveal-up">Tecnologías que Dominamos</h2>
+      <p class="section-subtitle reveal-up">Seleccionamos las mejores herramientas de la industria para construir plataformas escalables, mantenibles y de alto rendimiento.</p>
+    </div>
+
+    <!-- Pestañas de categorías de stack -->
+    <div class="tech-tabs-nav d-flex flex-wrap justify-content-center gap-2 mb-4 reveal-up">
+      <button class="tech-tab-btn active" data-category="all">Todos</button>
+      <button class="tech-tab-btn" data-category="backend">Backend & APIs</button>
+      <button class="tech-tab-btn" data-category="frontend">Frontend & UI</button>
+      <button class="tech-tab-btn" data-category="database">Bases de Datos</button>
+      <button class="tech-tab-btn" data-category="cloud">Cloud & DevOps</button>
+      <button class="tech-tab-btn" data-category="ai">IA & Automatización</button>
+    </div>
+
+    <div class="tech-grid reveal-up">
       {% for tech in technologies %}
-      <div class="tech-item reveal-up" style="animation-delay:{{ forloop.counter0 }}0ms">
+      <div class="tech-item" data-category="{{ tech.category }}">
         <div class="tech-icon-wrap" style="--tech-color:{{ tech.color }}">
           {% if tech.icon_svg %}
             {{ tech.icon_svg|safe }}
           {% elif tech.icon_class %}
-            <i class="{{ tech.icon_class }}"></i>
+            <i class="bi {{ tech.icon_class }}"></i>
           {% else %}
             <span class="tech-letter">{{ tech.name|slice:":2" }}</span>
           {% endif %}
         </div>
         <span class="tech-name">{{ tech.name }}</span>
+        <span class="tech-category-badge">{{ tech.get_category_display }}</span>
       </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- ===== PROYECTOS DESTACADOS ===== -->
-{% if featured_projects %}
-<section class="section-pad" id="proyectos">
+
+<!-- =================================================================
+     7. GARANTÍAS Y DIFERENCIALES B2B
+     ================================================================= -->
+{% if value_props %}
+<section class="guarantees-section section-pad position-relative" id="garantias">
   <div class="container">
     <div class="section-header text-center mb-5">
-      <span class="section-tag reveal-up">Portafolio</span>
-      <h2 class="section-title reveal-up">Proyectos Destacados</h2>
-      <p class="section-subtitle reveal-up">Soluciones reales para clientes reales</p>
+      <span class="section-tag reveal-up">Tranquilidad & Confianza</span>
+      <h2 class="section-title reveal-up">Por Qué Trabajar con Nexus Studio Code</h2>
+      <p class="section-subtitle reveal-up">Eliminamos los riesgos habituales del desarrollo de software con garantías contractuales sólidas.</p>
     </div>
+
+    <div class="row g-4">
+      {% for val in value_props %}
+      <div class="col-md-6 col-lg-3">
+        <div class="guarantee-card h-100 reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+          <div class="guarantee-icon text-accent mb-3">
+            <i class="bi {{ val.icon }}"></i>
+          </div>
+          <h4 class="guarantee-title text-white fs-5 mb-2">{{ val.title }}</h4>
+          <p class="small text-muted mb-0">{{ val.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+<!-- =================================================================
+     8. CASOS DE ÉXITO & PORTAFOLIO DESTACADO
+     ================================================================= -->
+{% if featured_projects %}
+<section class="section-pad position-relative" id="proyectos">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Casos de Éxito</span>
+      <h2 class="section-title reveal-up">Proyectos que Transforman Negocios</h2>
+      <p class="section-subtitle reveal-up">Soluciones reales con impacto medible construidas para nuestros clientes.</p>
+    </div>
+
     <div class="row g-4">
       {% for project in featured_projects %}
-      <div class="col-md-6 col-lg-4">
-        <div class="project-card reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
-          <div class="project-image-wrap">
-            {% if project.image %}
-              <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image" loading="lazy">
-            {% else %}
-              <div class="project-image-placeholder"><i class="bi bi-code-square"></i></div>
-            {% endif %}
-            <div class="project-overlay">
-              <div class="project-links">
-                {% if project.public_url %}<a href="{{ project.public_url }}" target="_blank" class="project-link"><i class="bi bi-box-arrow-up-right"></i></a>{% endif %}
-                {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" class="project-link"><i class="bi bi-github"></i></a>{% endif %}
-                <a href="{% url 'portfolio:detail' project.slug %}" class="project-link"><i class="bi bi-eye"></i></a>
-              </div>
-            </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="case-study-card h-100 reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+          <div class="case-study-header d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-accent-subtle text-accent fw-bold px-3 py-1">{{ project.get_category_display }}</span>
+            <span class="small text-muted"><i class="bi bi-calendar-event me-1"></i>{{ project.completion_date }}</span>
           </div>
-          <div class="project-body">
-            <div class="project-status status-{{ project.status }}">{{ project.get_status_display }}</div>
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-desc">{{ project.short_description|default:project.description|truncatechars:100 }}</p>
-            <div class="project-techs">
-              {% for tech in project.get_technologies_list %}
-              <span class="tech-badge">{{ tech }}</span>
+
+          <h3 class="case-study-title text-white fs-4 mb-2">
+            <a href="{% url 'portfolio:detail' project.slug %}" class="text-white text-decoration-none hover-accent">{{ project.title }}</a>
+          </h3>
+          
+          {% if project.client_name %}
+          <div class="client-badge mb-3 small text-muted">
+            <i class="bi bi-building me-1 text-accent"></i>Cliente: <strong>{{ project.client_name }}</strong>
+          </div>
+          {% endif %}
+
+          <p class="case-study-desc text-muted mb-4">{{ project.short_description|default:project.description|truncatechars:140 }}</p>
+
+          <!-- Highlights del Caso de Estudio -->
+          {% if project.results %}
+          <div class="case-results-box p-3 rounded-3 mb-4">
+            <strong class="d-block small text-accent mb-1"><i class="bi bi-graph-up-arrow me-1"></i>Impacto & Resultados:</strong>
+            <p class="small text-light mb-0" style="white-space: pre-line;">{{ project.results|truncatechars:180 }}</p>
+          </div>
+          {% endif %}
+
+          <div class="case-study-footer mt-auto pt-3 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div class="tech-pills-wrap d-flex flex-wrap gap-1">
+              {% for tech in project.get_technologies_list|slice:":4" %}
+              <span class="tech-badge-sm">{{ tech }}</span>
               {% endfor %}
             </div>
+            
+            <a href="{% url 'portfolio:detail' project.slug %}" class="btn btn-outline-neon btn-sm">
+              Ver Caso de Estudio <i class="bi bi-arrow-right ms-1"></i>
+            </a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
+
     <div class="text-center mt-5 reveal-up">
       <a href="{% url 'portfolio:list' %}" class="btn btn-outline-neon btn-lg">
-        <i class="bi bi-grid-3x3-gap me-2"></i>Ver todos los proyectos
+        <i class="bi bi-grid-3x3-gap me-2"></i>Ver todos los proyectos y casos
       </a>
     </div>
   </div>
 </section>
 {% endif %}
 
-<!-- ===== SOBRE NOSOTROS ===== -->
-<section class="about-section section-pad" id="nosotros">
-  <div class="container">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-5">
-        <div class="about-visual reveal-left">
-          <div class="about-card-main">
-            <div class="about-icon-grid">
-              <div class="about-icon-item"><i class="bi bi-code-slash"></i></div>
-              <div class="about-icon-item"><i class="bi bi-database"></i></div>
-              <div class="about-icon-item"><i class="bi bi-cloud-upload"></i></div>
-              <div class="about-icon-item"><i class="bi bi-shield-check"></i></div>
-            </div>
-            <div class="about-tagline">"Código que transforma negocios"</div>
-          </div>
-          <div class="about-years-badge">
-            <span class="years-number">5+</span>
-            <span class="years-label">años de experiencia</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-7">
-        <span class="section-tag reveal-up">Sobre Nosotros</span>
-        <h2 class="section-title reveal-up">Somos tu equipo de desarrollo de confianza</h2>
-        {% if config.about_history %}
-        <p class="text-muted reveal-up">{{ config.about_history }}</p>
-        {% else %}
-        <p class="text-muted reveal-up">Somos un estudio de desarrollo de software especializado en crear soluciones digitales de alto impacto. Combinamos experiencia técnica con visión de negocio para entregar productos que realmente hacen la diferencia.</p>
-        {% endif %}
-        <div class="row g-3 mt-2">
-          <div class="col-sm-6">
-            <div class="about-value-card reveal-up">
-              <i class="bi bi-bullseye"></i>
-              <div>
-                <strong>Misión</strong>
-                <p class="small text-muted mb-0">{{ config.about_mission|default:"Crear software que impulse el crecimiento de nuestros clientes." }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="about-value-card reveal-up" style="animation-delay:.1s">
-              <i class="bi bi-telescope"></i>
-              <div>
-                <strong>Visión</strong>
-                <p class="small text-muted mb-0">{{ config.about_vision|default:"Ser referentes en desarrollo de software a medida en Latinoamérica." }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="about-value-card reveal-up" style="animation-delay:.2s">
-              <i class="bi bi-stars"></i>
-              <div>
-                <strong>Valores</strong>
-                <p class="small text-muted mb-0">{{ config.about_values|default:"Calidad, transparencia, innovación y compromiso con cada proyecto." }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== TESTIMONIOS ===== -->
+<!-- =================================================================
+     9. TESTIMONIOS DE CLIENTES
+     ================================================================= -->
 {% if testimonials %}
-<section class="section-pad testimonials-section">
+<section class="section-pad testimonials-section position-relative" id="testimonios">
   <div class="container">
     <div class="section-header text-center mb-5">
-      <span class="section-tag reveal-up">Testimonios</span>
-      <h2 class="section-title reveal-up">Lo que dicen nuestros clientes</h2>
+      <span class="section-tag reveal-up">Prueba Social</span>
+      <h2 class="section-title reveal-up">Lo que Dicen Nuestros Clientes</h2>
+      <p class="section-subtitle reveal-up">La satisfacción y el éxito de quienes confían en nuestro equipo de ingeniería.</p>
     </div>
+
     <div class="row g-4">
       {% for testimonial in testimonials %}
       <div class="col-md-6 col-lg-4">
-        <div class="testimonial-card reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+        <div class="testimonial-card h-100 reveal-up" style="animation-delay:{{ forloop.counter0 }}00ms">
           <div class="testimonial-rating mb-3">
             {% for i in "12345" %}
               <i class="bi bi-star{% if forloop.counter <= testimonial.rating %}-fill text-warning{% endif %}"></i>
             {% endfor %}
           </div>
           <p class="testimonial-text">"{{ testimonial.message }}"</p>
-          <div class="testimonial-author">
+          
+          <div class="testimonial-author mt-auto pt-3 d-flex align-items-center">
             {% if testimonial.client_photo %}
-              <img src="{{ testimonial.client_photo.url }}" alt="{{ testimonial.client_name }}" class="testimonial-avatar">
+              <img src="{{ testimonial.client_photo.url }}" alt="{{ testimonial.client_name }}" class="testimonial-avatar me-3">
             {% else %}
-              <div class="testimonial-avatar-placeholder">{{ testimonial.client_name|slice:":1" }}</div>
+              <div class="testimonial-avatar-placeholder me-3">{{ testimonial.client_name|slice:":1" }}</div>
             {% endif %}
             <div>
-              <strong class="d-block">{{ testimonial.client_name }}</strong>
+              <strong class="d-block text-white">{{ testimonial.client_name }}</strong>
               <small class="text-muted">{{ testimonial.client_position }}{% if testimonial.client_company %} · {{ testimonial.client_company }}{% endif %}</small>
             </div>
           </div>
@@ -310,74 +755,125 @@
 </section>
 {% endif %}
 
-<!-- ===== CONTACTO ===== -->
-<section class="contact-section section-pad" id="contacto">
-  <div class="contact-bg-shape"></div>
+
+<!-- =================================================================
+     10. PREGUNTAS FRECUENTES (FAQ ACCORDION)
+     ================================================================= -->
+{% if faqs %}
+<section class="faq-section section-pad position-relative" id="faq">
   <div class="container">
-    <div class="row g-5">
-      <div class="col-lg-5">
-        <span class="section-tag reveal-up">Contacto</span>
-        <h2 class="section-title reveal-up">¿Tenés un proyecto en mente?</h2>
-        <p class="text-muted mb-4 reveal-up">Contanos sobre tu idea y te ayudamos a convertirla en realidad. Respondemos en menos de 24 horas.</p>
-        <div class="contact-info-list reveal-up">
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
-            <div>
-              <strong>Email</strong>
-              <p class="text-muted mb-0">{{ config.email }}</p>
+    <div class="section-header text-center mb-5">
+      <span class="section-tag reveal-up">Dudas Habituales</span>
+      <h2 class="section-title reveal-up">Preguntas Frecuentes</h2>
+      <p class="section-subtitle reveal-up">Respuestas claras sobre plazos, metodología, costos y propiedad intelectual.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion custom-accordion" id="faqAccordion">
+          {% for faq in faqs %}
+          <div class="accordion-item reveal-up mb-3" style="animation-delay:{{ forloop.counter0 }}00ms">
+            <h2 class="accordion-header" id="heading{{ faq.id }}">
+              <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ faq.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ faq.id }}">
+                <i class="bi bi-question-circle-fill text-accent me-3"></i>
+                <span>{{ faq.question }}</span>
+              </button>
+            </h2>
+            <div id="collapse{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ faq.id }}" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                {{ faq.answer }}
+              </div>
             </div>
           </div>
-          {% if config.phone %}
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="bi bi-whatsapp"></i></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+<!-- =================================================================
+     11. FORMULARIO DE CONTACTO & ASESORÍA
+     ================================================================= -->
+<section class="contact-section section-pad position-relative" id="contacto">
+  <div class="contact-bg-shape"></div>
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row g-5 align-items-center">
+      
+      <div class="col-lg-5">
+        <span class="section-tag reveal-up">Hablemos de tu Proyecto</span>
+        <h2 class="section-title reveal-up">¿Listo para construir el software de tu empresa?</h2>
+        <p class="text-muted mb-4 reveal-up">Cuéntanos sobre tu visión y te responderemos en menos de 24 horas con una evaluación técnica inicial.</p>
+        
+        <div class="contact-info-list reveal-up">
+          <div class="contact-info-item mb-3 d-flex align-items-center">
+            <div class="contact-info-icon me-3"><i class="bi bi-envelope-at-fill"></i></div>
             <div>
-              <strong>WhatsApp / Teléfono</strong>
-              <p class="text-muted mb-0">{{ config.phone }}</p>
+              <strong class="d-block text-white">Email Corporativo</strong>
+              <a href="mailto:{{ config.email }}" class="text-muted text-decoration-none">{{ config.email }}</a>
+            </div>
+          </div>
+          
+          {% if config.phone or config.clean_whatsapp_number %}
+          <div class="contact-info-item mb-3 d-flex align-items-center">
+            <div class="contact-info-icon me-3"><i class="bi bi-whatsapp"></i></div>
+            <div>
+              <strong class="d-block text-white">WhatsApp & Llamadas</strong>
+              <a href="{{ config.get_whatsapp_url }}" target="_blank" rel="noopener" class="text-muted text-decoration-none">{{ config.phone|default:config.clean_whatsapp_number }}</a>
             </div>
           </div>
           {% endif %}
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
+
+          <div class="contact-info-item mb-3 d-flex align-items-center">
+            <div class="contact-info-icon me-3"><i class="bi bi-shield-check"></i></div>
             <div>
-              <strong>Respuesta</strong>
-              <p class="text-muted mb-0">Menos de 24 horas hábiles</p>
+              <strong class="d-block text-white">Confidencialidad Garantizada</strong>
+              <span class="text-muted small">NDA legal firmado antes de empezar</span>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-lg-7">
-        <div class="contact-form-card reveal-right">
-          <form method="post" action="#contacto" novalidate>
+        <div class="contact-form-card reveal-right p-4 p-md-5 rounded-4 shadow-2xl">
+          <h3 class="text-white mb-2">Envíanos tu consulta</h3>
+          <p class="text-muted small mb-4">Completa el formulario y nos pondremos en contacto contigo.</p>
+          
+          <form method="post" action="{% url 'core:home' %}#contacto" novalidate>
             {% csrf_token %}
+            <input type="hidden" name="contact_submit" value="1">
             <div class="row g-3">
               <div class="col-sm-6">
-                <label class="form-label">{{ form.name.label }}</label>
+                <label class="form-label text-light small">{{ form.name.label }} <span class="text-accent">*</span></label>
                 {{ form.name }}
                 {% if form.name.errors %}<div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>{% endif %}
               </div>
               <div class="col-sm-6">
-                <label class="form-label">{{ form.email.label }}</label>
+                <label class="form-label text-light small">{{ form.email.label }} <span class="text-accent">*</span></label>
                 {{ form.email }}
                 {% if form.email.errors %}<div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>{% endif %}
               </div>
               <div class="col-12">
-                <label class="form-label">{{ form.phone.label }}</label>
+                <label class="form-label text-light small">{{ form.phone.label }}</label>
                 {{ form.phone }}
               </div>
               <div class="col-12">
-                <label class="form-label">{{ form.message.label }}</label>
+                <label class="form-label text-light small">{{ form.message.label }} <span class="text-accent">*</span></label>
                 {{ form.message }}
                 {% if form.message.errors %}<div class="invalid-feedback d-block">{{ form.message.errors.0 }}</div>{% endif %}
               </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary-neon w-100 btn-lg">
-                  <i class="bi bi-send me-2"></i>Enviar mensaje
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary-neon w-100 btn-lg py-3">
+                  <i class="bi bi-send-fill me-2"></i>Enviar Consulta
                 </button>
               </div>
             </div>
           </form>
         </div>
       </div>
+
     </div>
   </div>
 </section>
