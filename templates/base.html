@@ -65,14 +65,14 @@
       <a class="navbar-brand d-flex align-items-center" href="{% url 'core:home' %}">
         <span class="brand-logo me-2">
           {% if site_config.logo %}
-            <img src="{{ site_config.logo.url }}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
+            <img src="{{ site_config.logo.url }}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:150px;width:auto;">
           {% else %}
             <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
           {% endif %}
         </span>
-        <span class="brand-text d-none d-sm-inline-block fw-bold text-accent fs-5">
+        <!-- <span class="brand-text d-none d-sm-inline-block fw-bold text-accent fs-5">
           Nexus <span class="text-white">StudioCode</span>
-        </span>
+        </span> -->
       </a>
 
       <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
