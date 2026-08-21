@@ -28,6 +28,14 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   
+  <!-- Favicon -->
+  {% if site_config.favicon %}
+    <link rel="icon" href="{{ site_config.favicon.url }}">
+    <link rel="shortcut icon" href="{{ site_config.favicon.url }}">
+  {% else %}
+    <link rel="icon" type="image/png" href="{% static 'images/logoNSC.png' %}">
+  {% endif %}
+
   <!-- Schema.org JSON-LD para SEO de Empresa de Software -->
   <script type="application/ld+json">
   {
@@ -56,7 +64,11 @@
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="{% url 'core:home' %}">
         <span class="brand-logo me-2">
-          <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
+          {% if site_config.logo %}
+            <img src="{{ site_config.logo.url }}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
+          {% else %}
+            <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" class="brand-img" style="height:44px;width:auto;">
+          {% endif %}
         </span>
         <span class="brand-text d-none d-sm-inline-block fw-bold text-white fs-5">
           Nexus<span class="text-accent">Studio</span>
@@ -128,7 +140,11 @@
       <div class="row g-4 py-5">
         <div class="col-lg-4">
           <div class="footer-brand mb-3 d-flex align-items-center">
-            <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" style="height:44px;width:auto;" class="me-2">
+            {% if site_config.logo %}
+              <img src="{{ site_config.logo.url }}" alt="{{ site_config.company_name }} Logo" style="height:44px;width:auto;" class="me-2">
+            {% else %}
+              <img src="{% static 'images/logoNSC.png' %}" alt="{{ site_config.company_name }} Logo" style="height:44px;width:auto;" class="me-2">
+            {% endif %}
             <span class="fw-bold text-white fs-5">Nexus<span class="text-accent">Studio</span></span>
           </div>
           <p class="text-muted mb-4 pe-lg-4">{{ site_config.tagline|default:"Ingeniería de Software & Soluciones Digitales de Alto Impacto" }}</p>
