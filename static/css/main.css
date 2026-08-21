@@ -582,14 +582,20 @@ body {
 /* ─── TECHNOLOGIES ─────────────────────────────────── */
 .tech-section { background: var(--bg-dark); }
 .tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 .tech-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 130px;
+  flex-grow: 1;
+  max-width: 150px;
   gap: 12px;
   padding: 24px 12px;
   background: var(--bg-card);
@@ -1376,7 +1382,7 @@ body {
   .section-pad { padding: 64px 0; }
   .hero-title  { font-size: 2.2rem; }
   .code-window { font-size: 0.75rem; }
-  .tech-grid   { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .tech-item   { width: 100px; max-width: 120px; padding: 16px 8px; }
   .whatsapp-float-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 26px; }
 }
 
