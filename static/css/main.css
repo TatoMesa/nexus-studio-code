@@ -1370,19 +1370,73 @@ body {
   background: var(--accent-glow) !important;
 }
 
-/* ─── RESPONSIVE ──────────────────────────────────────── */
+/* ─── RESPONSIVE (OPTIMIZACIÓN MOBILE SLIM & UNCLUTTERED) ─── */
 @media (max-width: 991px) {
-  .hero-visual { margin-top: 40px; }
-  .floating-card { display: none; }
+  /* Logo & Navbar en Mobile (Desktop se mantiene intacto) */
+  .brand-img { max-height: 32px !important; width: auto !important; }
+  .footer-logo-img { max-height: 32px !important; width: auto !important; }
+  .navbar { padding: 8px 0 !important; }
+  
+  .hero-visual { margin-top: 24px; }
+  .floating-card { display: none !important; }
   .about-years-badge { bottom: -10px; right: 16px; }
-  .contact-form-card { padding: 24px; }
-  .whatsapp-tooltip { display: none; }
+  .contact-form-card { padding: 20px 16px !important; }
+  .whatsapp-tooltip { display: none !important; }
+
+  /* Reducir sobrecarga de paddings en mobile */
+  .section-pad { padding: 48px 0 !important; }
+  .section-header { margin-bottom: 28px !important; }
+  .section-title { font-size: 1.75rem !important; }
+  .section-subtitle { font-size: 0.9rem !important; margin-bottom: 12px !important; }
 }
+
 @media (max-width: 767px) {
-  .section-pad { padding: 64px 0; }
-  .hero-title  { font-size: 2.2rem; }
-  .code-window { font-size: 0.75rem; }
-  .tech-item   { width: 100px; max-width: 120px; padding: 16px 8px; }
-  .whatsapp-float-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 26px; }
+  /* Navbar & Logo aun más compacto en teléfonos */
+  .brand-img { max-height: 28px !important; width: auto !important; }
+  .footer-logo-img { max-height: 30px !important; width: auto !important; }
+
+  /* Hero Section limpia en Mobile */
+  .hero-section { padding-top: 88px !important; padding-bottom: 32px !important; }
+  .hero-title  { font-size: 1.7rem !important; line-height: 1.25 !important; margin-bottom: 14px !important; }
+  .hero-subtitle { font-size: 0.88rem !important; margin-bottom: 20px !important; }
+  .hero-badge-pill { font-size: 0.72rem !important; padding: 4px 10px !important; }
+
+  /* Ventana de Código IDE compacta */
+  .code-window { font-size: 0.72rem !important; border-radius: 10px !important; }
+  .code-window-header { padding: 8px 12px !important; }
+  .code-tabs { display: flex; overflow-x: auto; max-width: 180px; }
+  .code-tab-btn { font-size: 0.68rem !important; padding: 2px 6px !important; }
+
+  /* Cotizador Interactivo Mobile Slim */
+  .quote-calculator-section { padding: 40px 0 !important; }
+  .quote-card-container { padding: 18px 12px !important; border-radius: 14px !important; }
+  .quote-option-card .option-content { padding: 10px 12px !important; gap: 10px !important; }
+  .quote-option-card .option-icon { font-size: 1.25rem !important; }
+  .quote-checkbox-card { padding: 10px 12px !important; font-size: 0.82rem !important; }
+  .quote-live-result-box { padding: 16px 12px !important; }
+  .quote-live-result-box h3 { font-size: 1.4rem !important; }
+
+  /* Tarjetas de Servicios, Metodología, Garantías y Casos de Estudio */
+  .service-card, .process-step-card, .guarantee-card, .case-study-card {
+    padding: 20px 16px !important;
+    border-radius: 12px !important;
+  }
+  .step-num-badge { font-size: 1.4rem !important; margin-bottom: 6px !important; }
+  .step-title { font-size: 1.05rem !important; }
+
+  /* Grid de Stack Tecnológico Mobile */
+  .tech-grid { gap: 10px !important; }
+  .tech-item { width: 95px !important; max-width: 110px !important; padding: 14px 6px !important; gap: 8px !important; }
+  .tech-name { font-size: 0.78rem !important; }
+  .tech-icon-wrap { width: 38px !important; height: 38px !important; font-size: 1.2rem !important; }
+
+  /* Botón Flotante de WhatsApp */
+  .whatsapp-float-btn { bottom: 18px !important; right: 18px !important; width: 48px !important; height: 48px !important; font-size: 24px !important; }
 }
+
+@media (max-width: 575px) {
+  .hero-title { font-size: 1.55rem !important; }
+  .btn-lg { padding: 10px 18px !important; font-size: 0.9rem !important; }
+}
+
 
