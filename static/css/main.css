@@ -191,28 +191,43 @@ body {
 
 /* ─── NAVBAR ─────────────────────────────────────────── */
 #mainNav {
-  background: var(--bg-nav);
+  background: rgba(10, 15, 20, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 10px 0;
-  transition: var(--transition);
+  padding: 12px 0;
+  transition: all 0.3s ease;
+  z-index: 1030;
 }
 #mainNav.scrolled {
-  padding: 10px 0;
-  box-shadow: 0 4px 30px var(--shadow-deep);
+  padding: 8px 0;
+  background: rgba(10, 15, 20, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border-bottom-color: var(--border-hover);
 }
 
-.brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.navbar-brand {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 2rem;
+  padding: 0;
+}
 .brand-img {
-  max-height: 85px;
+  max-height: 48px;
   width: auto;
-  transition: var(--transition);
+  object-fit: contain;
+  transition: max-height 0.3s ease;
+}
+#mainNav.scrolled .brand-img {
+  max-height: 42px;
 }
 .footer-logo-img {
-  max-height: 75px;
+  max-height: 52px;
   width: auto;
+  object-fit: contain;
 }
+
 .brand-icon {
   width: 36px; height: 36px;
   background: var(--accent);
@@ -224,25 +239,38 @@ body {
   flex-shrink: 0;
 }
 .brand-text {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
   font-family: var(--font-main);
 }
 .brand-accent { color: var(--accent); }
-.navbar-brand { text-decoration: none; }
 
 .nav-link {
   color: var(--text-muted) !important;
   font-weight: 500;
-  font-size: 0.9rem;
-  padding: 6px 14px !important;
-  border-radius: 6px;
+  font-size: 0.92rem;
+  padding: 8px 14px !important;
+  border-radius: 8px;
   transition: var(--transition);
 }
-.nav-link:hover, .nav-link.active { color: var(--accent) !important; background: var(--accent-glow); }
-.navbar-toggler { border-color: var(--border); }
+.nav-link:hover, .nav-link.active {
+  color: var(--accent) !important;
+  background: var(--accent-glow);
+}
+.navbar-toggler {
+  border: 1px solid var(--border);
+  background: rgba(13, 21, 32, 0.8);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+.navbar-toggler:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+  outline: none;
+}
 .navbar-toggler-icon { filter: invert(1); }
 
 /* ─── HERO ───────────────────────────────────────────── */
@@ -253,7 +281,7 @@ body {
   align-items: center;
   background: var(--bg-darkest);
   overflow: hidden;
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 .hero-bg-grid {
@@ -1381,10 +1409,48 @@ body {
 
 /* ─── RESPONSIVE (OPTIMIZACIÓN MOBILE SLIM & UNCLUTTERED) ─── */
 @media (max-width: 991px) {
-  /* Logo & Navbar en Mobile (Desktop se mantiene intacto) */
-  .brand-img { max-height: 32px !important; width: auto !important; }
-  .footer-logo-img { max-height: 32px !important; width: auto !important; }
-  .navbar { padding: 8px 0 !important; }
+  /* Logo & Navbar en Mobile */
+  #mainNav { padding: 10px 0 !important; }
+  .brand-img { max-height: 34px !important; width: auto !important; }
+  .footer-logo-img { max-height: 36px !important; width: auto !important; }
+
+  /* Menú desplegable móvil estilo Glassmorphism oscuro */
+  #navbarNav {
+    background: rgba(13, 21, 32, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--border-hover) !important;
+    border-radius: 16px !important;
+    padding: 16px 14px !important;
+    margin-top: 10px !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow-faint) !important;
+  }
+  #navbarNav .navbar-nav {
+    gap: 4px !important;
+  }
+  #navbarNav .nav-item {
+    width: 100% !important;
+    margin: 2px 0 !important;
+  }
+  #navbarNav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 10px 14px !important;
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+  }
+  #navbarNav .nav-link:hover, #navbarNav .nav-link.active {
+    background: var(--accent-glow) !important;
+    color: var(--accent) !important;
+  }
+  #navbarNav .btn-primary-neon {
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+    margin-top: 8px !important;
+    padding: 12px 16px !important;
+  }
   
   .hero-visual { margin-top: 24px; }
   .floating-card { display: none !important; }
@@ -1401,8 +1467,8 @@ body {
 
 @media (max-width: 767px) {
   /* Navbar & Logo aun más compacto en teléfonos */
-  .brand-img { max-height: 28px !important; width: auto !important; }
-  .footer-logo-img { max-height: 30px !important; width: auto !important; }
+  .brand-img { max-height: 30px !important; width: auto !important; }
+  .footer-logo-img { max-height: 32px !important; width: auto !important; }
 
   /* Hero Section limpia en Mobile */
   .hero-section { padding-top: 88px !important; padding-bottom: 32px !important; }
