@@ -204,6 +204,15 @@ body {
 }
 
 .brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-img {
+  max-height: 85px;
+  width: auto;
+  transition: var(--transition);
+}
+.footer-logo-img {
+  max-height: 75px;
+  width: auto;
+}
 .brand-icon {
   width: 36px; height: 36px;
   background: var(--accent);
