@@ -76,16 +76,20 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#servicios">Servicios</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#cotizador"><i class="bi bi-calculator me-1 text-accent"></i>Cotizador</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#soluciones">Soluciones</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#proyectos">Casos de Éxito</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#metodologia">Metodología</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#tecnologias">Stack</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:list' %}">Casos de Éxito</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}#contacto">Contacto</a></li>
           <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-            <a class="btn btn-primary-neon btn-sm" href="{% url 'contact:contact' %}">
-              <i class="bi bi-chat-dots-fill me-1"></i>Contacto & Asesoría
+            {% if site_config.get_whatsapp_url %}
+            <a class="btn btn-primary-neon btn-sm" href="{{ site_config.get_whatsapp_url }}" target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp me-1"></i>Asesoría Inmediata
             </a>
+            {% else %}
+            <a class="btn btn-primary-neon btn-sm" href="{% url 'contact:contact' %}">
+              <i class="bi bi-chat-dots-fill me-1"></i>Asesoría Inmediata
+            </a>
+            {% endif %}
           </li>
         </ul>
       </div>
@@ -161,13 +165,12 @@
         </div>
         
         <div class="col-lg-2 col-6">
-          <h6 class="footer-title">Servicios</h6>
+          <h6 class="footer-title">Soluciones</h6>
           <ul class="footer-links">
-            <li><a href="{% url 'core:home' %}#servicios">Desarrollo Web & SaaS</a></li>
-            <li><a href="{% url 'core:home' %}#servicios">Sistemas ERP / CRM</a></li>
-            <li><a href="{% url 'core:home' %}#servicios">APIs & Backend</a></li>
-            <li><a href="{% url 'core:home' %}#servicios">Automatización & IA</a></li>
-            <li><a href="{% url 'core:home' %}#cotizador">Cotizador Online</a></li>
+            <li><a href="{% url 'core:home' %}#soluciones">Plataformas SaaS</a></li>
+            <li><a href="{% url 'core:home' %}#soluciones">Sistemas ERP / CRM</a></li>
+            <li><a href="{% url 'core:home' %}#soluciones">APIs & Cloud</a></li>
+            <li><a href="{% url 'core:home' %}#soluciones">Automatizaciones & IA</a></li>
           </ul>
         </div>
         
@@ -176,9 +179,8 @@
           <ul class="footer-links">
             <li><a href="{% url 'core:home' %}#metodologia">Metodología Ágil</a></li>
             <li><a href="{% url 'portfolio:list' %}">Casos de Éxito</a></li>
-            <li><a href="{% url 'core:home' %}#garantias">Garantías & NDA</a></li>
-            <li><a href="{% url 'core:home' %}#faq">Preguntas Frecuentes</a></li>
-            <li><a href="{% url 'contact:contact' %}">Contacto Directo</a></li>
+            <li><a href="{% url 'core:home' %}#contacto">Contacto Directo</a></li>
+            <li><a href="{% url 'contact:contact' %}">Formulario de Asesoría</a></li>
           </ul>
         </div>
         
